@@ -1,3 +1,14 @@
+- Improve the TI-85 skin with complete legends for every key:
+  - Show primary functions, all 2nd functions, and all ALPHA letters/symbols.
+  - Make the ALPHA lettering readable at the normal native GUI size, with
+    distinct colors for primary, 2nd, and ALPHA legends.
+  - Use the same accurate key legends in the native skin and web control panel.
+  - Preserve the existing key positions, clickable areas, and emulator key codes.
+  - Compare every legend with a TI-85 keypad reference and check that 2nd/ALPHA
+    combinations enter the expected functions and letters before release.
+  - Retain the current skin's appearance while adding the missing information;
+    create original artwork and record any reference attribution.
+
 - Linking between 2 tilem instances
 - Sound
 - Rewrite macro (parser and tokens).
