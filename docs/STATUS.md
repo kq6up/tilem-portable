@@ -127,12 +127,22 @@ this macOS machine when integrating the patch.
   runtime dependencies and prints CMake's linked libraries before building.
   NetBSD's missing X11 sets are now fetched from the official 10.1 archive,
   checked against the release SHA512 digests, and installed before GTK.
-  These CI dependency repairs await a fresh workflow result.
+  The follow-up also supplies GNU Make's Guile runtime and binutils' Flex
+  runtime. The Slackware container result remains pending at this commit.
+
+## NetBSD CI build verified (2.0.2)
+
+* A temporary NetBSD 10.1 amd64 VM in GitHub Actions compiled and staged the
+  GTK GUI, core, shared bridge, and headless tool successfully after installing
+  the matching native X11 runtime/development sets. This was CI run
+  https://github.com/kq6up/tilem-portable/actions/runs/38185064046 at 123e1b6.
+  No maintainer-owned NetBSD system was accessed. No ROM, GUI runtime,
+  calculator link transfer, or physical cable was exercised on NetBSD.
 
 ## Still pending
 
-* NetBSD native builds/GUI operation and the Slackware 15.0 x86 container build
-  remain to be confirmed. The ARM64 Slackware build/runtime is recorded above.
+* NetBSD GUI runtime and the Slackware 15.0 x86 container build remain to be
+  confirmed. NetBSD's CI build and ARM64 Slackware runtime are recorded above.
 * Package review/acceptance and Homebrew audit/installation are not performed.
   Recipe release placeholders and inherited GFDL image
   provenance must be resolved before submission.
