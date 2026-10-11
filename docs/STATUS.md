@@ -128,7 +128,16 @@ this macOS machine when integrating the patch.
   NetBSD's missing X11 sets are now fetched from the official 10.1 archive,
   checked against the release SHA512 digests, and installed before GTK.
   The follow-up also supplies GNU Make's Guile runtime and binutils' Flex
-  runtime. The Slackware container result remains pending at this commit.
+  runtime. The Slackware 15.0 x86-64 container now compiles the core, shared
+  bridge, and headless tool successfully with GCC 11.2.0:
+  https://github.com/kq6up/tilem-portable/actions/runs/38185429090/job/114606611228.
+  This container job does not build or run the GUI; the separate ARM64
+  Slackware GUI build/runtime is recorded above.
+* All four jobs completed successfully at e4fff5d: Ubuntu GUI, macOS GUI,
+  NetBSD GUI build/staging, and Slackware core/bridge/headless compilation.
+  Verified run: https://github.com/kq6up/tilem-portable/actions/runs/38185429090.
+  The historical v2.0.2 tag run remains failed; its tag and downloadable source
+  assets have not been changed to incorporate these CI-only follow-ups.
 
 ## NetBSD CI build verified (2.0.2)
 
@@ -141,8 +150,9 @@ this macOS machine when integrating the patch.
 
 ## Still pending
 
-* NetBSD GUI runtime and the Slackware 15.0 x86 container build remain to be
-  confirmed. NetBSD's CI build and ARM64 Slackware runtime are recorded above.
+* NetBSD GUI runtime and the Slackware 15.0 x86-64 GUI build/runtime remain to
+  be confirmed. NetBSD's GUI CI build, Slackware's x86-64 core build, and ARM64
+  Slackware GUI runtime are recorded above.
 * Package review/acceptance and Homebrew audit/installation are not performed.
   Recipe release placeholders and inherited GFDL image
   provenance must be resolved before submission.
