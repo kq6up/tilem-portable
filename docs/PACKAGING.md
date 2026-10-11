@@ -1,7 +1,8 @@
 # Packaging and GitHub preparation
 
-The folder is a local Git repository with an unmodified TilEm 2.0 import followed
-by the fork changes. No remote or public repository has been created.
+The Git repository retains an unmodified TilEm 2.0 import followed by the fork
+changes. Its public GitHub destination is
+https://github.com/kq6up/tilem-portable, configured locally as `origin`.
 Build outputs, `.deps`, `var`, app bundles and ROMs are ignored.
 
 ## Release source

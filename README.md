@@ -102,6 +102,11 @@ See [licensing](docs/LICENSING.md), `COPYING`, `COPYING.LESSER` and the retained
 upstream `README`. ROMs, local dependencies, app bundles, calculator saves and
 locally supplied toy files are excluded from Git and source release archives.
 
-The repository starts with an unmodified TilEm 2.0 import. No remote is
-configured. After reviewing the changes, create your GitHub repository and push
-`main`. Packaging recipes require its real release URL and checksum before use.
+The repository starts with an unmodified TilEm 2.0 import followed by the
+portable fork changes. Its GitHub destination is
+[kq6up/tilem-portable](https://github.com/kq6up/tilem-portable).
+Packaging recipes still require an actual release URL and checksum before use.
+
+The companion [TI85Nav](https://github.com/kq6up/ti85nav) repository contains
+the navigation BASIC sources, transferable program files, documentation, and
+the SIGHT v9 Internal almanac enhancement todo.
