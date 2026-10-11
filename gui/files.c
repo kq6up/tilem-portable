@@ -151,10 +151,21 @@ static char * find_filev(GFileTest test, const char *name, va_list rest)
 	}
 #endif
 
+/* Relocatable app bundle and installation prefix. */
+	if (program_dir) {
+		path = g_build_filename(program_dir, "..", "Resources", "tilem2", fullname, NULL);
+		if (g_file_test(path, test)) { g_free(fullname); return path; }
+		g_free(path);
+		path = g_build_filename(program_dir, "..", "share", "tilem2", fullname, NULL);
+		if (g_file_test(path, test)) { g_free(fullname); return path; }
+		g_free(path);
+	}
 #ifdef UNINSTALLED_SHARE_DIR
 	if (program_dir) {
-		path = g_build_filename(program_dir, UNINSTALLED_SHARE_DIR,
-		                        fullname, NULL);
+		if (g_path_is_absolute(UNINSTALLED_SHARE_DIR))
+			path = g_build_filename(UNINSTALLED_SHARE_DIR, fullname, NULL);
+		else
+			path = g_build_filename(program_dir, UNINSTALLED_SHARE_DIR, fullname, NULL);
 		if (g_file_test(path, test)) {
 			g_free(fullname);
 			return path;

@@ -1,0 +1,31 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Candidate for a locally published source release; TI libraries required.
+set -eu
+PRGNAM=tilem-portable
+VERSION=${VERSION:-2.0.1}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_local}
+ARCH=${ARCH:-$(uname -m)}
+case "$ARCH" in i?86) ARCH=i586; SLKCFLAGS='-O2 -march=i586 -mtune=i686'; LIBDIR=lib;;
+  x86_64) SLKCFLAGS='-O2 -fPIC'; LIBDIR=lib64;;
+  *) SLKCFLAGS='-O2'; LIBDIR=lib;; esac
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-$TMP}
+WORK=$(mktemp -d "$TMP/tilem-portable.XXXXXXXX")
+PKG="$WORK/package"
+mkdir -p "$PKG" "$OUTPUT"
+tar -xzf "$CWD/$PRGNAM-$VERSION.tar.gz" -C "$WORK"
+cd "$WORK/$PRGNAM-$VERSION"
+CFLAGS="$SLKCFLAGS" cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR="$LIBDIR" \
+  -DTILEM_BUILD_GTK=ON -DBUILD_TESTING=OFF
+cmake --build build --parallel "${TILEM_JOBS:-2}"
+DESTDIR="$PKG" cmake --install build
+mkdir -p "$PKG/usr/doc/$PRGNAM-$VERSION" "$PKG/install"
+cp -a README.md docs COPYING COPYING.LESSER "$PKG/usr/doc/$PRGNAM-$VERSION/"
+cp "$CWD/slack-desc" "$PKG/install/"
+cd "$PKG"
+/sbin/makepkg -l y -c n "$OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.txz"
+printf 'Retained build directory: %s\n' "$WORK"

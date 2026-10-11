@@ -32,6 +32,8 @@
 #include "gui.h"
 #include "files.h"
 #include "icons.h"
+#include "control.h"
+#include "macos.h"
 #include "msgbox.h"
 
 /* CMD LINE OPTIONS */
@@ -47,10 +49,12 @@ static gchar* cl_macro_to_run = NULL;
 static gboolean cl_debug_flag = FALSE;
 static gboolean cl_normalspeed_flag = FALSE;
 static gboolean cl_fullspeed_flag = FALSE;
+static gchar* cl_control_socket = NULL;
 
 
 static GOptionEntry entries[] =
 {
+	{ "control-socket", 0, 0, G_OPTION_ARG_FILENAME, &cl_control_socket, "Enable local automation on a Unix socket", "PATH" },
 	{ "rom", 'r', 0, G_OPTION_ARG_FILENAME, &cl_romfile, "The rom file to run", "FILE" },
 	{ "skin", 'k', 0, G_OPTION_ARG_FILENAME, &cl_skinfile, "The skin file to use", "FILE" },
 	{ "model", 'm', 0, G_OPTION_ARG_STRING, &cl_model, "The model to use", "NAME" },
@@ -217,6 +221,7 @@ int main(int argc, char **argv)
 	GError *error = NULL;
 	int model = 0;
 
+	tilem_macos_bundle_defaults(&cl_romfile, &cl_control_socket);
 	g_thread_init(NULL);
 	gtk_init(&argc, &argv);
 	set_program_path(argv[0]);
@@ -287,11 +292,18 @@ int main(int argc, char **argv)
 	else
 		tilem_calc_emulator_run(emu);
 
+	if (cl_control_socket && !tilem_control_start(emu, cl_control_socket, &error)) {
+		g_printerr("Control socket: %s\n", error->message);
+		g_clear_error(&error);
+		return 1;
+	}
+
 	g_signal_connect(emu->ewin->window, "destroy",
 	                 G_CALLBACK(gtk_main_quit), NULL);
 
 	gtk_main();
 
+	tilem_control_stop();
 	tilem_calc_emulator_pause(emu);
 
 	tilem_emulator_window_free(emu->ewin);

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800">
+<!-- SPDX-License-Identifier: GPL-3.0-or-later; original TilEm Portable drawing -->
+<rect x="0" y="0" width="400" height="800" fill="#232b36"/>
+<text x="200" y="35" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#ffffff">TilEm · TI-85</text>
+<rect x="48" y="52" width="304" height="160" fill="#151c24"/>
+<rect x="72" y="68" width="256" height="128" fill="#cad5a7"/>
+<text x="200" y="237" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#a3afbf">SCIENTIFIC GRAPHING CALCULATOR</text>
+<rect x="18" y="258" width="64" height="40" fill="#365b88"/>
+<text x="50" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F1</text>
+<rect x="93" y="258" width="64" height="40" fill="#365b88"/>
+<text x="125" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F2</text>
+<rect x="168" y="258" width="64" height="40" fill="#365b88"/>
+<text x="200" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F3</text>
+<rect x="243" y="258" width="64" height="40" fill="#365b88"/>
+<text x="275" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F4</text>
+<rect x="318" y="258" width="64" height="40" fill="#365b88"/>
+<text x="350" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F5</text>
+<rect x="18" y="310" width="64" height="40" fill="#365b88"/>
+<text x="50" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">2nd</text>
+<rect x="93" y="310" width="64" height="40" fill="#495260"/>
+<text x="125" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">EXIT</text>
+<rect x="168" y="310" width="64" height="40" fill="#495260"/>
+<text x="200" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">MORE</text>
+<rect x="243" y="310" width="64" height="40" fill="#495260"/>
+<text x="275" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LEFT</text>
+<rect x="318" y="310" width="64" height="40" fill="#495260"/>
+<text x="350" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">RIGHT</text>
+<rect x="18" y="362" width="64" height="40" fill="#495260"/>
+<text x="50" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">UP</text>
+<rect x="93" y="362" width="64" height="40" fill="#495260"/>
+<text x="125" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">DOWN</text>
+<rect x="168" y="362" width="64" height="40" fill="#365b88"/>
+<text x="200" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">ALPHA</text>
+<rect x="243" y="362" width="64" height="40" fill="#495260"/>
+<text x="275" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">x-VAR</text>
+<rect x="318" y="362" width="64" height="40" fill="#495260"/>
+<text x="350" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">DEL</text>
+<rect x="18" y="414" width="64" height="40" fill="#495260"/>
+<text x="50" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">GRAPH</text>
+<rect x="93" y="414" width="64" height="40" fill="#495260"/>
+<text x="125" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">STAT</text>
+<rect x="168" y="414" width="64" height="40" fill="#495260"/>
+<text x="200" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">PRGM</text>
+<rect x="243" y="414" width="64" height="40" fill="#495260"/>
+<text x="275" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">CUSTOM</text>
+<rect x="318" y="414" width="64" height="40" fill="#495260"/>
+<text x="350" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">CLEAR</text>
+<rect x="18" y="466" width="64" height="40" fill="#495260"/>
+<text x="50" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LOG</text>
+<rect x="93" y="466" width="64" height="40" fill="#495260"/>
+<text x="125" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">SIN</text>
+<rect x="168" y="466" width="64" height="40" fill="#495260"/>
+<text x="200" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">COS</text>
+<rect x="243" y="466" width="64" height="40" fill="#495260"/>
+<text x="275" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">TAN</text>
+<rect x="318" y="466" width="64" height="40" fill="#495260"/>
+<text x="350" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">^</text>
+<rect x="18" y="518" width="64" height="40" fill="#495260"/>
+<text x="50" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LN</text>
+<rect x="93" y="518" width="64" height="40" fill="#495260"/>
+<text x="125" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">EE</text>
+<rect x="168" y="518" width="64" height="40" fill="#495260"/>
+<text x="200" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">(</text>
+<rect x="243" y="518" width="64" height="40" fill="#495260"/>
+<text x="275" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">)</text>
+<rect x="318" y="518" width="64" height="40" fill="#495260"/>
+<text x="350" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">/</text>
+<rect x="18" y="570" width="64" height="40" fill="#495260"/>
+<text x="50" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">x²</text>
+<rect x="93" y="570" width="64" height="40" fill="#495260"/>
+<text x="125" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">7</text>
+<rect x="168" y="570" width="64" height="40" fill="#495260"/>
+<text x="200" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">8</text>
+<rect x="243" y="570" width="64" height="40" fill="#495260"/>
+<text x="275" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">9</text>
+<rect x="318" y="570" width="64" height="40" fill="#495260"/>
+<text x="350" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">×</text>
+<rect x="18" y="622" width="64" height="40" fill="#495260"/>
+<text x="50" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">,</text>
+<rect x="93" y="622" width="64" height="40" fill="#495260"/>
+<text x="125" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">4</text>
+<rect x="168" y="622" width="64" height="40" fill="#495260"/>
+<text x="200" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">5</text>
+<rect x="243" y="622" width="64" height="40" fill="#495260"/>
+<text x="275" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">6</text>
+<rect x="318" y="622" width="64" height="40" fill="#495260"/>
+<text x="350" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">−</text>
+<rect x="18" y="674" width="64" height="40" fill="#495260"/>
+<text x="50" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">STO</text>
+<rect x="93" y="674" width="64" height="40" fill="#495260"/>
+<text x="125" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">1</text>
+<rect x="168" y="674" width="64" height="40" fill="#495260"/>
+<text x="200" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">2</text>
+<rect x="243" y="674" width="64" height="40" fill="#495260"/>
+<text x="275" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">3</text>
+<rect x="318" y="674" width="64" height="40" fill="#495260"/>
+<text x="350" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">+</text>
+<rect x="18" y="726" width="64" height="40" fill="#495260"/>
+<text x="50" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">ON</text>
+<rect x="93" y="726" width="64" height="40" fill="#495260"/>
+<text x="125" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">0</text>
+<rect x="168" y="726" width="64" height="40" fill="#495260"/>
+<text x="200" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">.</text>
+<rect x="243" y="726" width="64" height="40" fill="#495260"/>
+<text x="275" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">(−)</text>
+<rect x="318" y="726" width="64" height="40" fill="#495260"/>
+<text x="350" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">ENTER</text>
+<text x="200" y="791" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#a3afbf">Right-click for files, settings and debugger</text>
+</svg>

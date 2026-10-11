@@ -1,0 +1,12 @@
+                  |-----handy-ruler------------------------------------------------------|
+tilem-portable: tilem-portable (TI graphing calculator emulator)
+tilem-portable:
+tilem-portable: TilEm Portable retains TilEm's native GTK GUI, calculator debugger
+tilem-portable: and link transfers. It adds a portable CMake build, an optional
+tilem-portable: local control server and a standalone emulator core.
+tilem-portable:
+tilem-portable: Calculator ROMs must be supplied separately by the user.
+tilem-portable:
+tilem-portable: Native GUI: GPL v3 or later. Core: LGPL v2.1 or later.
+tilem-portable:
+tilem-portable:

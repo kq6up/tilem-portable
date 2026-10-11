@@ -43,3 +43,7 @@ Your contribution ...
 Have fun with tilem 2 ;)
 
 Thibault Duponchelle (aka contra-sh)
+
+Portable fork addition:
+ti85.skn and ti85.svg = original vector keypad drawing, GPL v3 or later.
+Regenerate with scripts/generate-ti85-skin.py (Python 3 and Cairo).

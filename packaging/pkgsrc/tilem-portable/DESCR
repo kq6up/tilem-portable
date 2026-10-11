@@ -1,0 +1,5 @@
+TilEm Portable is a fork of the TilEm 2.0 TI graphing calculator emulator.
+It retains the native GTK calculator GUI, debugger and link transfers,
+adds a CMake build and an optional local HTTP control interface, and
+includes a standalone emulator core and command line LCD capture tool.
+Calculator ROM images must be supplied separately by the user.

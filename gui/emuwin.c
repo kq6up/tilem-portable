@@ -432,6 +432,7 @@ TilemEmulatorWindow *tilem_emulator_window_new(TilemCalcEmulator *emu)
 
 	/* Create the window */
 	ewin->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(ewin->window), PACKAGE_STRING);
 
 	g_signal_connect(ewin->window, "window-state-event",
 	                 G_CALLBACK(window_state_changed), ewin);

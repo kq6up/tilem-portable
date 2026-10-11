@@ -1,0 +1,27 @@
+/build*/
+/_install/
+/.deps/
+/var/
+/config.log
+/config.status
+/config.h
+/Makefile
+/emu/Makefile
+/db/Makefile
+/gui/Makefile
+/data/Makefile
+*.o
+*.a
+*.dylib
+*.so
+*.so.*
+*.rom
+*.ROM
+*.sav
+*.85p
+__pycache__/
+.DS_Store
+
+/TilEm Portable.app/
+
+/*.app/

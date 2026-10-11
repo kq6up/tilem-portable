@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+#define PACKAGE_NAME "TilEm Portable"
+#define PACKAGE_TARNAME "tilem-portable"
+#define PACKAGE_VERSION "@PROJECT_VERSION@"
+#define PACKAGE_STRING PACKAGE_NAME " " PACKAGE_VERSION
+#define PACKAGE_BUGREPORT ""
+#define PACKAGE_URL "https://lpg.ticalc.org/prj_tilem/"
+#define STDC_HEADERS 1
+#define HAVE_STDINT_H 1
+#define HAVE_UINTPTR_T 1
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#define WORDS_BIGENDIAN 1
+#endif

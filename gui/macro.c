@@ -34,7 +34,7 @@
 
 
 /* Allocate a new TilemMacro structure which is empty */
-static TilemMacro* tilem_macro_new() {
+static TilemMacro* tilem_macro_new(void) {
 	TilemMacro *macro = g_new(TilemMacro, 1);
 	macro->n = 0;
 	macro->actions = NULL;
@@ -56,8 +56,12 @@ static TilemMacroAtom** tilem_macro_actions_new(TilemMacro *macro, int n) {
 /* Try to destroy the TilemMacro if really allocated */
 static void tilem_macro_finalize(TilemMacro* macro) {
 	if(macro) {
-		if(macro->actions)
-			g_free(macro->actions);
+        int i;
+        for (i = 0; i < macro->n; ++i) {
+            g_free(macro->actions[i]->value);
+            g_free(macro->actions[i]);
+        }
+        g_free(macro->actions);
 		g_free(macro);
 	}
 }
@@ -70,7 +74,7 @@ void tilem_macro_start(TilemCalcEmulator *emu) {
 	tilem_macro_finalize(emu->macro);
 
 	/* Then allocate a new one */	
-	emu->macro = tilem_macro_new(emu);
+	emu->macro = tilem_macro_new();
 }
 
 /* Add an action to the macro. The action could be :
@@ -86,7 +90,7 @@ void tilem_macro_add_action(TilemMacro* macro, int type, char * value) {
 	macro->actions = tilem_macro_actions_new(macro, n + 1);
 
 	/* Then we need to save the action */	
-	macro->actions[n] =  g_new(char, strlen(value)); /* FIXME : gcc says : "assignment from incompatible pointer type" ??? */
+	macro->actions[n] = g_new0(TilemMacroAtom, 1);
 	macro->actions[n]->value = g_strdup(value);
 	macro->actions[n]->type = type;
 	macro->n++;
@@ -131,14 +135,14 @@ void tilem_macro_write_file(TilemCalcEmulator *emu) {
 				printf("type : %d    value : %s\n", emu->macro->actions[i]->type, emu->macro->actions[i]->value);
 				/* Test if it's a key press or a file loading action */
 				if(emu->macro->actions[i]->type == 1) {
-					char * lengthchar = g_new0(char, 4);
+					char lengthchar[5];
 					int length = strlen(emu->macro->actions[i]->value);
 					fwrite("file=", 1, 5, fp);
-					sprintf(lengthchar, "%04d", strlen(emu->macro->actions[i]->value));
-					fwrite(lengthchar, 1, sizeof(int), fp);
+					if (length > 9999) { fclose(fp); g_free(filename); g_free(dir); return; }
+					g_snprintf(lengthchar, sizeof(lengthchar), "%04d", length);
+					fwrite(lengthchar, 1, 4, fp);
 					fwrite("-", 1, 1, fp);
 					fwrite(emu->macro->actions[i]->value, 1, length, fp);
-					g_free(lengthchar);
 				} else {
 					fwrite(emu->macro->actions[i]->value, 1, 4, fp);
 					fwrite(",", 1, 1, fp);

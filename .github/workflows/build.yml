@@ -1,0 +1,51 @@
+name: Portable builds
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  gui:
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Linux dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y cmake pkg-config libgtk2.0-dev libticalcs-dev libticables-dev libtifiles-dev libticonv-dev
+      - name: macOS dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install cmake pkgconf gtk+ glib libusb libarchive
+          scripts/bootstrap-tilibs.sh -DCMAKE_PREFIX_PATH="$(brew --prefix)"
+          echo "PKG_CONFIG_PATH=$PWD/.deps/prefix/lib/pkgconfig" >> "$GITHUB_ENV"
+      - name: Compile native GUI, core and bridge
+        run: scripts/build.sh -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="$PWD/_install"
+      - name: Stage installation
+        run: cmake --install build
+  netbsd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Compile with pkgsrc dependencies on NetBSD 10.1
+        uses: vmactions/netbsd-vm@1d9767765fd3f986e6de3aff4b1148f0c3a45f01 # v1.4.1
+        with:
+          release: '10.1'
+          usesh: true
+          prepare: /usr/sbin/pkg_add cmake pkgconf gtk2 libticalcs2
+          run: |
+            export PATH="/usr/pkg/bin:$PATH"
+            export PKG_CONFIG_PATH=/usr/pkg/lib/pkgconfig
+            scripts/build.sh -DBUILD_TESTING=OFF -DCMAKE_PREFIX_PATH=/usr/pkg -DCMAKE_INSTALL_PREFIX="$PWD/_install"
+            cmake --install build
+  slackware-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Compile core in Slackware 15.0
+        run: |
+          docker run --rm -v "$PWD:/source" -w /source aclemons/slackware:15.0 sh -ec '
+            slackpkg -batch=on -default_answer=y update
+            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz
+            scripts/build.sh -DTILEM_BUILD_GTK=OFF -DBUILD_TESTING=OFF
+          '

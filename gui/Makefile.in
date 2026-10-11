@@ -47,6 +47,7 @@ objects = tilem2.o \
 	animation.o \
 	breakpoints.o \
 	config.o \
+	control.o \
 	charmap.o \
 	debugger.o \
 	disasmview.o \
@@ -62,6 +63,7 @@ objects = tilem2.o \
 	keybindings.o \
 	keypaddlg.o \
 	link.o \
+	macos.o \
 	macro.o \
 	memmodel.o \
 	memview.o \
@@ -97,6 +99,14 @@ tilem2@EXEEXT@: $(objects) ../emu/libtilemcore.a
 
 tilem2.o: tilem2.c icons.h files.h $(common_headers)
 	$(compile) -c $(srcdir)/tilem2.c
+
+# macOS bundle defaults
+macos.o: macos.c macos.h $(common_headers)
+	$(compile) -c $(srcdir)/macos.c
+
+# Local automation
+control.o: control.c control.h $(common_headers)
+	$(compile) -c $(srcdir)/control.c
 
 # Debugger
 debugger.o: debugger.c disasmview.h $(common_headers)
