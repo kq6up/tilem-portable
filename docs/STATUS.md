@@ -118,6 +118,9 @@ this macOS machine when integrating the patch.
   The workflow now includes the missing paths/packages and uses `pkg_add -u`.
   Matrix jobs no longer cancel each other on the first failure. These changes
   do not constitute a completed NetBSD build.
+* The next CI run compiled and staged the native GUI successfully on both
+  Ubuntu 24.04 and macOS 14. Further setup fixes add NetBSD's native X11
+  pkg-config directory and libxml2 to the Slackware container dependencies.
 
 ## Still pending
 

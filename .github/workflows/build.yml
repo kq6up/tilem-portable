@@ -36,7 +36,7 @@ jobs:
           prepare: /usr/sbin/pkg_add -u cmake pkgconf 'gtk2+' libticalcs2
           run: |
             export PATH="/usr/pkg/bin:$PATH"
-            export PKG_CONFIG_PATH=/usr/pkg/lib/pkgconfig
+            export PKG_CONFIG_PATH=/usr/pkg/lib/pkgconfig:/usr/X11R7/lib/pkgconfig
             scripts/build.sh -DBUILD_TESTING=OFF -DCMAKE_PREFIX_PATH=/usr/pkg -DCMAKE_INSTALL_PREFIX="$PWD/_install"
             cmake --install build
   slackware-core:
@@ -47,6 +47,6 @@ jobs:
         run: |
           docker run --rm -v "$PWD:/source" -w /source aclemons/slackware:15.0 sh -ec '
             slackpkg -batch=on -default_answer=y update
-            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd
+            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd libxml2
             scripts/build.sh -DTILEM_BUILD_GTK=OFF -DBUILD_TESTING=OFF
           '
