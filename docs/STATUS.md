@@ -2,6 +2,8 @@
 
 ## Completed on this machine
 
+* Source published to https://github.com/kq6up/tilem-portable, preserving the
+  original import and development commit history.
 * Original TilEm 2.0 imported into a local Git repository in Downloads.
 * CMake core, shared bridge, CLI and full GTK GUI compiled with AppleClang 21
   on Apple Silicon macOS, using project-local GTK/TI dependencies and existing
@@ -51,8 +53,8 @@
 
 * Slackware and NetBSD native builds and GUI operation remain unverified.
   Build instructions, candidate recipes and build-only CI are prepared.
-* GitHub publication, package review/acceptance and Homebrew audit/installation
-  are not performed. Recipe release placeholders and inherited GFDL image
+* Package review/acceptance and Homebrew audit/installation are not performed.
+  Recipe release placeholders and inherited GFDL image
   provenance must be resolved before submission.
 * The macOS development app uses local dependencies and is not a self-contained,
   signed distribution. GTK 2 deprecation requires a longer-term GUI maintenance
