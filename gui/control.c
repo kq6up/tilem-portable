@@ -8,6 +8,9 @@
 #endif
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <gtk/gtk.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
@@ -139,9 +142,43 @@ static gboolean incoming(GSocketService *listener, GSocketConnection *connection
 }
 gboolean tilem_control_start(TilemCalcEmulator *emu, const char *path, GError **error) {
     GSocketAddress *address;
+    struct stat before, after;
     g_return_val_if_fail(service == NULL, FALSE);
-    service = g_socket_service_new();
     address = g_unix_socket_address_new(path);
+    if (g_lstat(path, &before) == 0) {
+        GSocket *probe;
+        GError *probe_error = NULL;
+        gboolean connected;
+        if (!S_ISSOCK(before.st_mode) || before.st_uid != getuid()) {
+            g_set_error(error, G_IO_ERROR, G_IO_ERROR_EXISTS,
+                        "Control path exists and is not an owned socket: %s", path);
+            g_object_unref(address); return FALSE;
+        }
+        probe = g_socket_new(G_SOCKET_FAMILY_UNIX, G_SOCKET_TYPE_STREAM,
+                             G_SOCKET_PROTOCOL_DEFAULT, error);
+        if (!probe) { g_object_unref(address); return FALSE; }
+        g_socket_set_timeout(probe, 1);
+        connected = g_socket_connect(probe, address, NULL, &probe_error);
+        g_object_unref(probe);
+        if (connected || !g_error_matches(probe_error, G_IO_ERROR, G_IO_ERROR_CONNECTION_REFUSED)) {
+            g_set_error(error, G_IO_ERROR, G_IO_ERROR_ADDRESS_IN_USE,
+                        "Control socket is already active or unavailable: %s", path);
+            g_clear_error(&probe_error); g_object_unref(address); return FALSE;
+        }
+        g_clear_error(&probe_error);
+        /* Remove only the same stale socket that was just probed. */
+        if (g_lstat(path, &after) || before.st_dev != after.st_dev
+                || before.st_ino != after.st_ino || g_unlink(path)) {
+            g_set_error(error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                        "Cannot remove stale control socket: %s", path);
+            g_object_unref(address); return FALSE;
+        }
+    } else if (errno != ENOENT) {
+        g_set_error(error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                    "Cannot inspect control socket: %s", path);
+        g_object_unref(address); return FALSE;
+    }
+    service = g_socket_service_new();
     if (!g_socket_listener_add_address(G_SOCKET_LISTENER(service), address,
             G_SOCKET_TYPE_STREAM, G_SOCKET_PROTOCOL_DEFAULT, NULL, NULL, error)) {
         g_object_unref(address); g_object_unref(service); service = NULL; return FALSE;

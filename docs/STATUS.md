@@ -23,10 +23,17 @@
   and `var/run/control-201.sock`, to avoid reconnecting to an older GTK process
   that remained running. The browser panel is attached to the updated app.
 
+* Corrected STAR's Goto destination cache. The corrected native run selected
+  Alpheratz and accepted 2026-10-11 12:00 UT; it displayed GHA Aries 200.057,
+  SHA 357.329 and Dec 29.145. This confirms execution, not astronomical accuracy.
+* Web buttons remain usable during transfers: F2 selected OVERW on the actual
+  duplicate STAR prompt and the transfer completed successfully.
+* Forced-quit recovery now probes an existing owned Unix socket and removes it
+  only when it is stale. The macOS app always requests control on startup;
+  reopening through Finder reconnected the native GUI and browser successfully.
+
 ## Still pending
 
-* STAR's Goto destination cache was missing from the first conversion and has
-  been corrected. The corrected program still needs its final native run.
 * Slackware and NetBSD native builds and GUI operation remain unverified.
   Build instructions, candidate recipes and build-only CI are prepared.
 * GitHub publication, package review/acceptance and Homebrew audit/installation

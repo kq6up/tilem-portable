@@ -23,7 +23,7 @@ void tilem_macos_bundle_defaults(char **rom, char **control) {
         line[strcspn(line, "\r\n")] = 0;
         value = strchr(line, '='); if (!value) continue; *value++ = 0;
         if (!strcmp(line, "ROM")) { if (g_file_test(value, G_FILE_TEST_IS_REGULAR)) *rom = g_strdup(value); }
-        else if (!strcmp(line, "CONTROL_SOCKET")) { if (!g_file_test(value, G_FILE_TEST_EXISTS)) *control = g_strdup(value); }
+        else if (!strcmp(line, "CONTROL_SOCKET")) { *control = g_strdup(value); }
         else if (!strcmp(line, "XDG_CONFIG_HOME") || !strcmp(line, "GDK_PIXBUF_MODULE_FILE"))
             g_setenv(line, value, FALSE);
     }
