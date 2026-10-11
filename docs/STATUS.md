@@ -4,6 +4,9 @@
 
 * Source published to https://github.com/kq6up/tilem-portable, preserving the
   original import and development commit history.
+* The 2.0.1 source release was published before integrating the Linux fix:
+  https://github.com/kq6up/tilem-portable/releases/tag/v2.0.1. It includes the
+  source gzip and SHA256SUMS.txt, tagged at commit b371fdda.
 * Original TilEm 2.0 imported into a local Git repository in Downloads.
 * CMake core, shared bridge, CLI and full GTK GUI compiled with AppleClang 21
   on Apple Silicon macOS, using project-local GTK/TI dependencies and existing
@@ -48,6 +51,30 @@
   star and declination. For Alpheratz at 2026-10-11 12:00 UT the actual LCD
   displayed 197.386 and 29.145 in DDD.MMm; the user confirmed the presentation.
   Its existing decimal-degree modulo-360 calculation is retained.
+
+## Linux build evidence reported by Claude (2.0.2)
+
+The following results were reported in the maintainer-supplied Claude build
+notes and patch dated October 11, 2026. They were not independently rerun on
+this macOS machine when integrating the patch.
+
+* Ubuntu 24.04 (GCC 13.3, GTK 2.24.33): the GUI, core, bridge and headless tool
+  build with `scripts/build.sh -DBUILD_TESTING=OFF`. The GUI ran under Xvfb with
+  `-m ti85 --control-socket`, booted a TI-85 ROM, accepted key presses, returned
+  the LCD and received programs. 2.0.1 failed to link here: `S_ISSOCK` in
+  `gui/control.c` was hidden by strict C99; CMake now defines `_DEFAULT_SOURCE`
+  for the GUI on Linux only.
+* Link transfers depend on the TI library version. With Ubuntu 24.04's packaged
+  libticalcs 1.1.10 (2023-11-26 snapshot) a 148-byte program transferred, but
+  every program tried with 384 or more data bytes failed on the calculator with
+  `ERROR 35 LINK TRANSMISSION ERROR`. Built against the tilibs revision pinned in
+  `scripts/bootstrap-tilibs.sh`, all of them transferred. Use the pinned
+  libraries on Linux if you send programs.
+* The new `_DEFAULT_SOURCE` definition is limited to the Linux GUI target.
+  The macOS app name, bundle identifier, control socket, and saved-state directory
+  remain at their existing 2.0.1 identities so this source update does not point
+  the launcher at a different calculator save. A macOS build of 2.0.2 remains
+  to be confirmed; the earlier local macOS build evidence above is for 2.0.1.
 
 ## Still pending
 

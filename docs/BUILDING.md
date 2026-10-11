@@ -52,6 +52,22 @@ Open the app in Finder/LaunchServices. Direct launching from a restricted
 headless sandbox cannot initialize Quartz screens. Moving the development app or
 its private dependencies requires rebuilding it. The app does not contain a ROM.
 
+## Debian / Ubuntu
+
+```sh
+sudo apt-get install cmake pkg-config libgtk2.0-dev libusb-1.0-0-dev \
+  libticalcs-dev libticables-dev libtifiles-dev libticonv-dev
+scripts/build.sh -DBUILD_TESTING=OFF
+```
+
+`libusb-1.0-0-dev` is needed because the packaged `ticables2.pc` requires it.
+The packaged TI libraries are enough to build and run, but program transfers
+larger than a few hundred bytes failed with them on Ubuntu 24.04 (see
+[status](STATUS.md)). For working transfers also install `libarchive-dev`, run
+`scripts/bootstrap-tilibs.sh`, and export the `PKG_CONFIG_PATH` it prints before
+building. A headless start needs `-m ti85` (or the right model) so the
+model-selection dialog does not appear.
+
 ## Slackware
 
 Use a full Slackware installation with the development tools, CMake, GTK 2,

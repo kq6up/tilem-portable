@@ -3,7 +3,7 @@
 class TilemPortable < Formula
   desc "TI graphing calculator emulator with native GUI and local control"
   homepage "https://github.com/@OWNER@/@REPOSITORY@"
-  url "https://github.com/@OWNER@/@REPOSITORY@/releases/download/v2.0.1/tilem-portable-2.0.1.tar.gz"
+  url "https://github.com/@OWNER@/@REPOSITORY@/releases/download/v2.0.2/tilem-portable-2.0.2.tar.gz"
   sha256 "@SHA256@"
   # License metadata for inherited GFDL skin assets must be completed before release.
   license all_of: ["GPL-3.0-or-later", "LGPL-2.1-or-later"]

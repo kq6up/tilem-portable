@@ -1,9 +1,9 @@
 # $NetBSD$
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Candidate only. Fill @OWNER@/@REPOSITORY@, generate distinfo and PLIST.
-DISTNAME=       tilem-portable-2.0.1
+DISTNAME=       tilem-portable-2.0.2
 CATEGORIES=     emulators
-MASTER_SITES=   https://github.com/@OWNER@/@REPOSITORY@/releases/download/v2.0.1/
+MASTER_SITES=   https://github.com/@OWNER@/@REPOSITORY@/releases/download/v2.0.2/
 
 MAINTAINER=     pkgsrc-users@NetBSD.org
 HOMEPAGE=       https://github.com/@OWNER@/@REPOSITORY@/

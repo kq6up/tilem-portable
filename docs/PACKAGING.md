@@ -10,9 +10,9 @@ Build outputs, `.deps`, `var`, app bundles and ROMs are ignored.
 Create an immutable tag after reviewing the commit, then generate the source:
 
 ```sh
-git tag v2.0.1
-git archive --format=tar --prefix=tilem-portable-2.0.1/ v2.0.1 | gzip -n > tilem-portable-2.0.1.tar.gz
-shasum -a 256 tilem-portable-2.0.1.tar.gz
+git tag v2.0.2
+git archive --format=tar --prefix=tilem-portable-2.0.2/ v2.0.2 | gzip -n > tilem-portable-2.0.2.tar.gz
+shasum -a 256 tilem-portable-2.0.2.tar.gz
 ```
 
 Publish that exact archive as a GitHub release attachment. Put its URL and

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 cmake_minimum_required(VERSION 3.16)
-project(tilem_portable VERSION 2.0.1 LANGUAGES C)
+project(tilem_portable VERSION 2.0.2 LANGUAGES C)
 include(GNUInstallDirs)
 include(CTest)
 include(CheckLibraryExists)
@@ -168,6 +168,11 @@ if(TILEM_BUILD_GTK)
     SHARE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/tilem2"
     UNINSTALLED_SHARE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
   target_link_libraries(tilem2 PRIVATE tilemdb tilemcore PkgConfig::GTK PkgConfig::TICALCS)
+  if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    # With CMAKE_C_EXTENSIONS OFF, glibc hides S_ISSOCK (gui/control.c) unless a
+    # feature-test macro is set. Linux only: other platforms build as before.
+    target_compile_definitions(tilem2 PRIVATE _DEFAULT_SOURCE)
+  endif()
   install(TARGETS tilem2 RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
   install(DIRECTORY data/skins data/symbols DESTINATION ${CMAKE_INSTALL_DATADIR}/tilem2)
   install(FILES data/keybindings.ini DESTINATION ${CMAKE_INSTALL_DATADIR}/tilem2)
