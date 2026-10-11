@@ -91,6 +91,9 @@ Use an X session for the native GTK GUI.
 
 Install CMake, pkgconf, GTK 2 and `libticalcs2` from the same pkgsrc branch and
 ABI. The latter depends on the other three TI libraries. Python is optional.
+Install the native X11 `xbase` and `xcomp` sets from the matching NetBSD release
+as well: GTK's binary packages use their shared libraries, headers and
+pkg-config files. Minimal CI images may omit these sets.
 For example, with binary package administration privileges:
 
 ```sh

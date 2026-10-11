@@ -47,9 +47,11 @@ jobs:
         run: |
           docker run --rm -v "$PWD:/source" -w /source aclemons/slackware:15.0 sh -ec '
             slackpkg -batch=on -default_answer=y update
-            # slackpkg does not resolve dependencies; include CMake/libcurl runtime libraries.
-            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd libxml2 nghttp2 c-ares libidn2 libunistring openldap cyrus-sasl libssh2 libpsl brotli krb5 e2fsprogs keyutils
+            # slackpkg does not resolve dependencies; include CMake/libcurl and GNU Make/Guile runtimes.
+            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd libxml2 nghttp2 c-ares libidn2 libunistring openldap cyrus-sasl libssh2 libpsl brotli krb5 e2fsprogs keyutils guile gc libffi readline ncurses libtool
             ldd /usr/bin/cmake
+            ldd /usr/bin/make
             cmake --version
+            make --version
             scripts/build.sh -DTILEM_BUILD_GTK=OFF -DBUILD_TESTING=OFF
           '
