@@ -121,6 +121,13 @@ this macOS machine when integrating the patch.
 * The next CI run compiled and staged the native GUI successfully on both
   Ubuntu 24.04 and macOS 14. Further setup fixes add NetBSD's native X11
   pkg-config directory and libxml2 to the Slackware container dependencies.
+* The v2.0.2 tag run also completed both Ubuntu and macOS GUI jobs successfully.
+  Its Slackware container failed before compilation because CMake could not
+  load `libnghttp2.so.14`; the workflow now installs the additional libcurl
+  runtime dependencies and prints CMake's linked libraries before building.
+  NetBSD's missing X11 sets are now fetched from the official 10.1 archive,
+  checked against the release SHA512 digests, and installed before GTK.
+  These CI dependency repairs await a fresh workflow result.
 
 ## Still pending
 

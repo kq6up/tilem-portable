@@ -33,7 +33,7 @@ jobs:
         with:
           release: '10.1'
           usesh: true
-          prepare: /usr/sbin/pkg_add -u cmake pkgconf 'gtk2+' libticalcs2
+          prepare: sh scripts/ci-netbsd-deps.sh
           run: |
             export PATH="/usr/pkg/bin:$PATH"
             export PKG_CONFIG_PATH=/usr/pkg/lib/pkgconfig:/usr/X11R7/lib/pkgconfig
@@ -47,6 +47,9 @@ jobs:
         run: |
           docker run --rm -v "$PWD:/source" -w /source aclemons/slackware:15.0 sh -ec '
             slackpkg -batch=on -default_answer=y update
-            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd libxml2
+            # slackpkg does not resolve dependencies; include CMake/libcurl runtime libraries.
+            slackpkg -batch=on -default_answer=y install cmake gcc gcc-g++ make binutils glibc kernel-headers gmp mpfr libmpc libarchive libuv rhash openssl zlib bzip2 xz lz4 zstd libxml2 nghttp2 c-ares libidn2 libunistring openldap cyrus-sasl libssh2 libpsl brotli krb5 e2fsprogs keyutils
+            ldd /usr/bin/cmake
+            cmake --version
             scripts/build.sh -DTILEM_BUILD_GTK=OFF -DBUILD_TESTING=OFF
           '
