@@ -94,7 +94,7 @@ ABI. The latter depends on the other three TI libraries. Python is optional.
 For example, with binary package administration privileges:
 
 ```sh
-pkg_add cmake pkgconf gtk2 libticalcs2 python313
+pkg_add cmake pkgconf 'gtk2+' libticalcs2 python313
 export PATH="/usr/pkg/bin:$PATH"
 export PKG_CONFIG_PATH="/usr/pkg/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 scripts/build.sh -DCMAKE_PREFIX_PATH=/usr/pkg -DCMAKE_INSTALL_PREFIX=/usr/pkg -DBUILD_TESTING=OFF

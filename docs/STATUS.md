@@ -73,13 +73,56 @@ this macOS machine when integrating the patch.
 * The new `_DEFAULT_SOURCE` definition is limited to the Linux GUI target.
   The macOS app name, bundle identifier, control socket, and saved-state directory
   remain at their existing 2.0.1 identities so this source update does not point
-  the launcher at a different calculator save. A macOS build of 2.0.2 remains
-  to be confirmed; the earlier local macOS build evidence above is for 2.0.1.
+  the launcher at a different calculator save. A macOS rebuild of 2.0.2 is
+  recorded below; the earlier GUI runtime evidence above is for 2.0.1.
+
+## Slackware build and runtime verified (2.0.2)
+
+* Built on the maintainer's ARM64 Slackware 15.0+ system over SSH:
+  Linux 6.18.52-armv8, GCC 16.2.0, CMake 4.4.3, GTK 2.24.33, and GLib 2.90.0.
+  `scripts/bootstrap-tilibs.sh` built the pinned TI libraries under the checkout's
+  private `.deps/prefix`; no system packages were replaced. The GUI, core,
+  shared bridge, and headless tool compiled, and installation staged privately.
+* Ran the real GTK GUI under Xvfb with the TI-85 vector skin and the maintainer's
+  ROM. The native control socket returned the actual 128x64 LCD and keys;
+  pressing ON, CLEAR, 2, +, 2, ENTER displayed 4.
+* Built TI85Nav's supplied `tools/ascii85p.c` with the Slackware C99 compiler.
+  It packed all eight supplied navigation sources and passed its own file
+  structure/checksum checks. Its five main programs (SETUP, SIGHT, MOON, STAR,
+  and SUN) all transferred through the native link with the pinned TI libraries
+  and completed without ERROR 35. This does not identify every possible cause
+  of ERROR 35; malformed program encoding remains a separate possibility.
+* SETUP stored the position and weather defaults. MOON at 2026-10-11 16:00 UTC
+  displayed GHA 53.389 and declination -15.478 in DDD.MMm, HP 56.2 minutes, and
+  SD 15.3 minutes. SUN's supplied 2026-08-29 16:15:53 UTC example displayed
+  GHA 63.449, declination 9.109, and SD 15.8. SIGHT's recorded first Moon case
+  completed all three result pages with an intercept of 1.9995632127 NM.
+* STAR selected Alpheratz at 2026-10-11 12:00 UTC and displayed GHA Aries
+  200.057, SHA 357.329, and declination 29.145 in DDD.MMm. Its final page
+  displayed GHA star 197.386 and declination 29.145. These are program execution
+  checks against the recorded examples, not a new general almanac accuracy study.
+* This confirms the GTK runtime under a virtual X display and native socket
+  transfers on this ARM64 Slackware system. Physical USB cables and operation
+  on the user's visible desktop were not exercised. AIR, SEA, and HO229 were
+  packed and structurally checked; their runtime was not checked in this pass.
+
+## macOS rebuild and CI setup (2.0.2)
+
+* Recompiled the native GUI, core, and bridge successfully on this Apple Silicon
+  Mac with `scripts/build.sh -DBUILD_TESTING=OFF`. The installed development app
+  was not replaced or restarted during this build, preserving its live session.
+* The first automatic CI run of the Linux patch exposed setup problems:
+  Homebrew's keg-only libarchive was missing from `PKG_CONFIG_PATH`, the
+  Slackware container lacked liblz4, and the NetBSD job used `gtk2` instead of
+  the binary package name `gtk2+` and encountered existing dependency versions.
+  The workflow now includes the missing paths/packages and uses `pkg_add -u`.
+  Matrix jobs no longer cancel each other on the first failure. These changes
+  do not constitute a completed NetBSD build.
 
 ## Still pending
 
-* Slackware and NetBSD native builds and GUI operation remain unverified.
-  Build instructions, candidate recipes and build-only CI are prepared.
+* NetBSD native builds/GUI operation and the Slackware 15.0 x86 container build
+  remain to be confirmed. The ARM64 Slackware build/runtime is recorded above.
 * Package review/acceptance and Homebrew audit/installation are not performed.
   Recipe release placeholders and inherited GFDL image
   provenance must be resolved before submission.
