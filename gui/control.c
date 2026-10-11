@@ -41,6 +41,7 @@ static void transfer_finished(TilemCalcEmulator *emu, gpointer data, gboolean ca
     transfer_error = g_strdup(cancelled ? "Transfer cancelled" : sf->error_message);
     transfer_status = transfer_error ? "error" : "done";
     transfer_busy = FALSE;
+    if (!transfer_error) tilem_calc_emulator_autosave(emu);
     g_free(sf->filename); g_free(sf->display_name); g_free(sf->error_message);
     g_slice_free(struct TilemSendFileInfo, sf);
 }

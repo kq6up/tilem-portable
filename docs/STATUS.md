@@ -35,6 +35,18 @@
 * Fixed the native keypad background's initial draw at the skin's exact size.
   The app was rebuilt and restarted; the user confirmed the corrected appearance.
 
+* Enabled automatic state saves for the macOS development app, using the
+  private `var/config-201/calculator.sav`. Native launches can opt in with
+  `--autosave`; `--no-autosave` disables it. Saves run every 30 seconds when
+  no link task is active, after successful web transfers, and on normal exit.
+  State writes use a private sibling file and atomic replacement.
+* Reloaded SUN and STAR, closed the updated app normally, and reopened it.
+  Both remained in its program menu; STAR ran from the restored calculator RAM.
+* The private STAR copy retains two result pages. The last page now shows GHA
+  star and declination. For Alpheratz at 2026-10-11 12:00 UT the actual LCD
+  displayed 197.386 and 29.145 in DDD.MMm; the user confirmed the presentation.
+  Its existing decimal-degree modulo-360 calculation is retained.
+
 ## Still pending
 
 * Slackware and NetBSD native builds and GUI operation remain unverified.

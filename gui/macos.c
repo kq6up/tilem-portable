@@ -10,7 +10,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #endif
-void tilem_macos_bundle_defaults(char **rom, char **control) {
+void tilem_macos_bundle_defaults(char **rom, char **control, char **state, gboolean *autosave) {
 #ifdef __APPLE__
     char path[PATH_MAX], real[PATH_MAX], *slash, *value, line[PATH_MAX + 64];
     uint32_t size = sizeof(path);
@@ -24,11 +24,13 @@ void tilem_macos_bundle_defaults(char **rom, char **control) {
         value = strchr(line, '='); if (!value) continue; *value++ = 0;
         if (!strcmp(line, "ROM")) { if (g_file_test(value, G_FILE_TEST_IS_REGULAR)) *rom = g_strdup(value); }
         else if (!strcmp(line, "CONTROL_SOCKET")) { *control = g_strdup(value); }
+        else if (!strcmp(line, "STATE_FILE")) *state = g_strdup(value);
+        else if (!strcmp(line, "AUTOSAVE")) *autosave = !strcmp(value, "1");
         else if (!strcmp(line, "XDG_CONFIG_HOME") || !strcmp(line, "GDK_PIXBUF_MODULE_FILE"))
             g_setenv(line, value, FALSE);
     }
     fclose(file);
 #else
-    (void)rom; (void)control;
+    (void)rom; (void)control; (void)state; (void)autosave;
 #endif
 }

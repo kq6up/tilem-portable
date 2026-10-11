@@ -53,6 +53,7 @@ typedef struct _TilemCalcEmulator {
 	TilemCalc *calc;
 	gboolean paused;
 	gboolean exiting;
+	gboolean autosave;      /* persist periodically and on normal exit */
 	gboolean limit_speed;   /* limit to actual speed */
 
 	/* Timer used for speed limiting */
@@ -150,6 +151,9 @@ gboolean tilem_calc_emulator_revert_state(TilemCalcEmulator *emu,
 /* Save the calculator state. */
 gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu,
                                         GError **err);
+
+/* Save when automatic persistence is enabled and no link task is active. */
+void tilem_calc_emulator_autosave(TilemCalcEmulator *emu);
 
 /* Reset the calculator. */
 void tilem_calc_emulator_reset(TilemCalcEmulator *emu);

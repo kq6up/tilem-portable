@@ -50,10 +50,13 @@ static gboolean cl_debug_flag = FALSE;
 static gboolean cl_normalspeed_flag = FALSE;
 static gboolean cl_fullspeed_flag = FALSE;
 static gchar* cl_control_socket = NULL;
+static gboolean cl_autosave = FALSE;
 
 
 static GOptionEntry entries[] =
 {
+	{ "autosave", 0, 0, G_OPTION_ARG_NONE, &cl_autosave, "Save calculator state periodically and on exit", NULL },
+	{ "no-autosave", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &cl_autosave, "Disable automatic state saves", NULL },
 	{ "control-socket", 0, 0, G_OPTION_ARG_FILENAME, &cl_control_socket, "Enable local automation on a Unix socket", "PATH" },
 	{ "rom", 'r', 0, G_OPTION_ARG_FILENAME, &cl_romfile, "The rom file to run", "FILE" },
 	{ "skin", 'k', 0, G_OPTION_ARG_FILENAME, &cl_skinfile, "The skin file to use", "FILE" },
@@ -72,6 +75,12 @@ static GOptionEntry entries[] =
 
 
 /* #########  MAIN  ######### */
+static gboolean autosave_tick(gpointer data)
+{
+    tilem_calc_emulator_autosave(data);
+    return TRUE;
+}
+
 
 /* Order of preference for automatic model selection. */
 static const char model_search_order[] =
@@ -220,8 +229,9 @@ int main(int argc, char **argv)
 	GOptionContext *context;
 	GError *error = NULL;
 	int model = 0;
+	guint autosave_timer = 0;
 
-	tilem_macos_bundle_defaults(&cl_romfile, &cl_control_socket);
+	tilem_macos_bundle_defaults(&cl_romfile, &cl_control_socket, &cl_statefile, &cl_autosave);
 	g_thread_init(NULL);
 	gtk_init(&argc, &argv);
 	set_program_path(argv[0]);
@@ -257,6 +267,7 @@ int main(int argc, char **argv)
 
 	load_initial_rom(emu, cl_romfile, cl_statefile, cl_files_to_load, model);
 
+	emu->autosave = cl_autosave;
 	emu->ewin = tilem_emulator_window_new(emu);
 
 	if (cl_skinless_flag)
@@ -301,10 +312,15 @@ int main(int argc, char **argv)
 	g_signal_connect(emu->ewin->window, "destroy",
 	                 G_CALLBACK(gtk_main_quit), NULL);
 
+	if (cl_autosave)
+		autosave_timer = g_timeout_add_seconds(30, autosave_tick, emu);
 	gtk_main();
 
+	if (autosave_timer) g_source_remove(autosave_timer);
 	tilem_control_stop();
+	tilem_calc_emulator_cancel_tasks(emu);
 	tilem_calc_emulator_pause(emu);
+	tilem_calc_emulator_autosave(emu);
 
 	tilem_emulator_window_free(emu->ewin);
 	tilem_calc_emulator_free(emu);

@@ -471,7 +471,8 @@ gboolean tilem_calc_emulator_revert_state(TilemCalcEmulator *emu, GError **err)
 gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 {
 	FILE *romfile, *savfile;
-	char *dname;
+	char *dname, *temporary;
+	int state_fd;
 	int errnum = 0;
 
 	g_return_val_if_fail(emu != NULL, FALSE);
@@ -501,7 +502,14 @@ gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 
 	/* Open state file */
 
-	savfile = g_fopen(emu->state_file_name, "wb");
+	temporary = g_strconcat(emu->state_file_name, ".XXXXXX", NULL);
+    state_fd = g_mkstemp(temporary);
+    savfile = state_fd < 0 ? NULL : fdopen(state_fd, "wb");
+    if (!savfile && state_fd >= 0) {
+        errnum = errno;
+        close(state_fd); g_unlink(temporary);
+        errno = errnum;
+    }
 	if (!savfile) {
 		errnum = errno;
 		dname = g_filename_display_basename(emu->state_file_name);
@@ -511,6 +519,7 @@ gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 		            dname, g_strerror(errnum));
 		g_free(dname);
 		if (romfile) fclose(romfile);
+		g_free(temporary);
 		return FALSE;
 	}
 
@@ -531,6 +540,7 @@ gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 		            dname, g_strerror(errnum));
 		g_free(dname);
 		fclose(savfile);
+		g_unlink(temporary); g_free(temporary);
 		tilem_calc_emulator_unlock(emu);
 		return FALSE;
 	}
@@ -541,6 +551,10 @@ gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 		errnum = errno;
 
 	tilem_calc_emulator_unlock(emu);
+
+	if (!errnum && g_rename(temporary, emu->state_file_name)) errnum = errno;
+	if (errnum) g_unlink(temporary);
+	g_free(temporary);
 
 	if (errnum) {
 		dname = g_filename_display_basename(emu->state_file_name);
@@ -553,6 +567,20 @@ gboolean tilem_calc_emulator_save_state(TilemCalcEmulator *emu, GError **err)
 	}
 
 	return TRUE;
+}
+
+void tilem_calc_emulator_autosave(TilemCalcEmulator *emu)
+{
+    gboolean idle;
+    GError *error = NULL;
+    if (!emu->autosave) return;
+    tilem_calc_emulator_lock(emu);
+    idle = !emu->task_busy && g_queue_is_empty(emu->task_queue);
+    tilem_calc_emulator_unlock(emu);
+    if (idle && !tilem_calc_emulator_save_state(emu, &error)) {
+        g_warning("Unable to save calculator state: %s", error->message);
+        g_clear_error(&error);
+    }
 }
 
 void tilem_calc_emulator_reset(TilemCalcEmulator *emu)

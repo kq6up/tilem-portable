@@ -30,6 +30,8 @@ PLIST
   printf 'XDG_CONFIG_HOME=%s\n' "$root/var/config-201"
   [ ! -f "$root/.deps/loaders.cache" ] || printf 'GDK_PIXBUF_MODULE_FILE=%s\n' "$root/.deps/loaders.cache"
   printf 'ROM=%s\n' "${TILEM_ROM:-$root/../TI85.ROM}"
+  printf 'STATE_FILE=%s\n' "$root/var/config-201/calculator.sav"
+  printf 'AUTOSAVE=1\n'
   printf 'CONTROL_SOCKET=%s\n' "$root/var/run/control-201.sock"
 } > "$app/Contents/Resources/runtime.env"
 codesign --force --sign - "$app" >/dev/null 2>&1

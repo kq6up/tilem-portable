@@ -23,7 +23,15 @@ _install/bin/tilem2 -r /path/to/TI85.ROM
 On macOS, GTK 2 uses Homebrew's Quartz backend. The development app can be
 created with `TILEM_ROM=/path/to/TI85.ROM scripts/make-macos-app.sh`, then opened
 in Finder. It contains the real compiled GUI and its resources. It uses existing
-runtime libraries and is not a self-contained distributable app.
+runtime libraries and is not a self-contained distributable app. It enables
+`--autosave`, keeping calculator state in `var/config-201/calculator.sav`.
+Automatic saves run every 30 seconds when no link task is active, after successful
+web transfers, and on normal exit. Completed state files replace the previous
+save atomically. A forced quit may lose changes since the last completed save.
+
+For other native launches, enable this with `--autosave --state-file /path/to/calc.sav`.
+Use `--no-autosave` to disable it. Without automatic saving, use the native
+**Save Calculator** command to preserve RAM and programs before closing.
 
 [Building](docs/BUILDING.md) covers Homebrew, Slackware and NetBSD.
 [Packaging](docs/PACKAGING.md) includes candidate tap, pkgsrc and SlackBuild
