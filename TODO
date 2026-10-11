@@ -9,6 +9,9 @@
   - Retain the current skin's appearance while adding the missing information;
     create original artwork and record any reference attribution.
 
+- Complete the NetBSD CI image's native X11 runtime/development sets before
+  treating its GUI build job as verified; GTK binary packages require them.
+
 - Linking between 2 tilem instances
 - Sound
 - Rewrite macro (parser and tokens).
