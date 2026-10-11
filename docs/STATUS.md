@@ -32,6 +32,9 @@
   only when it is stale. The macOS app always requests control on startup;
   reopening through Finder reconnected the native GUI and browser successfully.
 
+* Fixed the native keypad background's initial draw at the skin's exact size.
+  The app was rebuilt and restarted; the user confirmed the corrected appearance.
+
 ## Still pending
 
 * Slackware and NetBSD native builds and GUI operation remain unverified.

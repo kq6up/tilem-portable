@@ -285,7 +285,9 @@ void redraw_screen(TilemEmulatorWindow *ewin)
 	if (ewin->skin) {
 		ewin->layout = gtk_layout_new(NULL, NULL);
 
-		pImage = gtk_image_new();
+		/* The initial allocation can already match the skin dimensions.
+		 * Set the image now; that resize callback may correctly do no work. */
+		pImage = gtk_image_new_from_pixbuf(ewin->skin->image);
 		gtk_layout_put(GTK_LAYOUT(ewin->layout), pImage, 0, 0);
 		ewin->background = pImage;
 
