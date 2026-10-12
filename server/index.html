@@ -5,8 +5,18 @@
 <style>
 :root{color-scheme:dark;font:16px system-ui,sans-serif;background:#121b21;color:#e5edef}body{max-width:720px;margin:36px auto;padding:0 18px}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:24px;margin:0}small{color:#94a8b3}.calculator{background:#263641;border:1px solid #45606f;border-radius:22px;padding:24px;margin:24px 0}canvas{display:block;width:100%;height:auto;image-rendering:pixelated;background:#cad5a7;border:12px solid #13212a;border-radius:7px;box-sizing:border-box}.keys{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}button{border:1px solid #617985;border-radius:7px;background:#3b505e;color:white;min-height:44px;font:600 15px system-ui;cursor:pointer;box-shadow:0 3px #0b151b}button:hover{background:#507084}button:active,button.active{transform:translateY(2px);box-shadow:0 1px #0b151b;background:#678ca0}button.function{background:#455f80}button.accent{background:#82672d}button.digit{background:#71818b;color:#fff}button:disabled{opacity:.4;cursor:wait}.status{min-height:22px;color:#b4c7d1;font-size:14px}.actions{display:flex;gap:12px;margin:18px 0}a{color:#8ed4ea}footer{color:#94a8b3;font-size:13px;line-height:1.5}
 </style>
+<style>
+[hidden]{display:none!important}
+.keys button{min-width:0;min-height:62px;padding:6px 5px 9px}
+.key-legends{display:flex;justify-content:space-between;align-items:baseline;gap:2px;min-height:16px;margin-bottom:5px;font-size:clamp(8px,1.65vw,11px);white-space:nowrap}
+.key-second{color:#f4d47b}.key-alpha{color:#87d7ed;font-size:clamp(10px,2vw,13px)}
+.key-primary{display:block;font-size:clamp(10px,2.5vw,16px)}
+button.alpha-key{background:#365b88}
+.legend-guide{font-size:12px;line-height:1.5;color:#b4c7d1;margin:16px 0 0}
+@media(max-width:480px){body{padding:0 12px}.calculator{padding:12px}.keys{gap:8px}.key-legends{margin-bottom:4px}}
+</style>
 <header><h1>TilEm calculator control</h1><small id="model">Connecting…</small></header>
-<div class="calculator"><canvas id="lcd" width="128" height="64" aria-label="Live calculator LCD"></canvas><div class="keys" id="keys"></div></div>
+<div class="calculator"><canvas id="lcd" width="128" height="64" aria-label="Live calculator LCD"></canvas><div class="keys" id="keys"></div><p class="legend-guide" id="legend-guide" hidden><span class="key-second">Gold: 2nd functions</span> · <span class="key-alpha">Blue: ALPHA letters</span> · ␣ means space.<br>Press 2nd or ALPHA, then the key. Use 2nd → ALPHA for lowercase letters.</p></div>
 <p class="status" id="status" role="status">Waiting for the calculator…</p>
 <div class="actions"><button id="release">Release all keys</button><button id="reset">Power cycle</button><a href="/screen.png" target="_blank">View LCD image</a></div>
 <div class="actions" id="programs" hidden><select id="program"></select><button id="send">Send program</button></div>
@@ -14,14 +24,24 @@
 <script>
 const labels={Down:'↓',Left:'←',Right:'→',Up:'↑',Enter:'ENTER',Add:'+',Sub:'−',Mul:'×',Div:'÷',Power:'^',Clear:'CLEAR',Chs:'(−)',RParen:')',LParen:'(',DecPnt:'.',On:'ON',Store:'STO→',Comma:',',Square:'x²',Ln:'ln',Log:'log',Graph:'GRAPH',Alpha:'ALPHA',Exit:'EXIT',More:'MORE',Prgm:'PRGM',Stat:'STAT',Custom:'CUSTOM',XVar:'x-VAR',Sin:'sin',Cos:'cos',Tan:'tan',Del:'DEL'};
 const layout=['F1','F2','F3','F4','F5','2nd','Exit','More','Left','Up','Alpha','XVar','Del','Down','Right','Graph','Stat','Prgm','Custom','Clear','Log','Sin','Cos','Tan','Power','Ln','EE','LParen','RParen','Div','Square','7','8','9','Mul','Comma','4','5','6','Sub','Store','1','2','3','Add','On','0','DecPnt','Chs','Enter'];
-const lcd=document.querySelector('#lcd'),context=lcd.getContext('2d'),status=document.querySelector('#status'),keybox=document.querySelector('#keys');let keys=new Set(),busy=Promise.resolve(),shown='';
+const lcd=document.querySelector('#lcd'),context=lcd.getContext('2d'),status=document.querySelector('#status'),keybox=document.querySelector('#keys');let keys=new Set(),busy=Promise.resolve(),shown='',ti85Legends={};
+function renderKey(button,key,model){
+  const legend=model==='ti85'?ti85Legends[key]:null;
+  button.title=legend?[legend.primary,legend.second?'2nd: '+legend.second:'',legend.alpha?'ALPHA: '+(legend.alpha==='␣'?'space':legend.alpha):''].filter(Boolean).join(' · '):key;
+  button.setAttribute('aria-label',button.title);
+  if(!legend){button.textContent=labels[key]||key;return}
+  const row=document.createElement('span');row.className='key-legends';row.setAttribute('aria-hidden','true');
+  for(const [name,value] of [['second',legend.second],['alpha',legend.alpha]]){const span=document.createElement('span');span.className='key-'+name;span.textContent=value||'\u00a0';row.appendChild(span)}
+  const primary=document.createElement('span');primary.className='key-primary';primary.textContent=legend.primary;primary.setAttribute('aria-hidden','true');button.append(row,primary);
+}
 async function request(path,body){const r=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const data=await r.json();if(!r.ok)throw new Error(data.error||r.statusText);return data}
 function tap(key){if(!keys.has(key))return;busy=busy.then(async()=>{const b=[...keybox.children].find(b=>b.dataset.key===key);b?.classList.add('active');try{await request('/api/key',{key});await refresh()}finally{b?.classList.remove('active')}}).catch(e=>status.textContent=e.message)}
-async function refresh(){try{const s=await request('/api/state');document.querySelector('#model').textContent=s.model+' · '+s.backend;const signature=s.keys.map(k=>k.name).join(',');if(signature!==shown){shown=signature;keys=new Set(s.keys.map(k=>k.name));keybox.replaceChildren();for(const key of [...layout.filter(k=>keys.has(k)),...s.keys.map(k=>k.name).filter(k=>!layout.includes(k))]){const b=document.createElement('button');b.textContent=labels[key]||key;b.dataset.key=key;b.title=key;b.setAttribute('aria-label',key);if(key.startsWith('F'))b.className='function';if(key==='2nd'||key==='Alpha')b.className='accent';if(/^\d$/.test(key))b.className='digit';b.onclick=()=>tap(key);keybox.appendChild(b)}}lcd.width=s.width;lcd.height=s.height;const pixels=atob(s.pixels),image=context.createImageData(s.width,s.height);for(let i=0;i<pixels.length;i++){const dark=pixels.charCodeAt(i)!==0;image.data.set(dark?[34,46,23,255]:[202,213,167,255],i*4)}context.putImageData(image,0,0);status.textContent=(s.transfer?.status==='sending'?'Sending program · ':s.transfer?.status==='error'?'Transfer failed: '+s.transfer.error+' · ':'')+(s.lcd_active?'LCD on':'LCD off · press ON')+' · '+s.width+' × '+s.height+' · PC '+s.pc.toString(16).padStart(4,'0')}catch(e){status.textContent=e.message}}
+async function refresh(){try{const s=await request('/api/state');document.querySelector('#model').textContent=s.model+' · '+s.backend;const signature=s.model+':'+s.keys.map(k=>k.name).join(',');if(signature!==shown){shown=signature;keys=new Set(s.keys.map(k=>k.name));keybox.replaceChildren();document.querySelector('#legend-guide').hidden=s.model!=='ti85';for(const key of [...layout.filter(k=>keys.has(k)),...s.keys.map(k=>k.name).filter(k=>!layout.includes(k))]){const b=document.createElement('button');b.dataset.key=key;if(key.startsWith('F'))b.className='function';if(key==='2nd')b.className='accent';if(key==='Alpha')b.className='alpha-key';if(/^\d$/.test(key))b.className='digit';renderKey(b,key,s.model);b.onclick=()=>tap(key);keybox.appendChild(b)}}lcd.width=s.width;lcd.height=s.height;const pixels=atob(s.pixels),image=context.createImageData(s.width,s.height);for(let i=0;i<pixels.length;i++){const dark=pixels.charCodeAt(i)!==0;image.data.set(dark?[34,46,23,255]:[202,213,167,255],i*4)}context.putImageData(image,0,0);status.textContent=(s.transfer?.status==='sending'?'Sending program · ':s.transfer?.status==='error'?'Transfer failed: '+s.transfer.error+' · ':'')+(s.lcd_active?'LCD on':'LCD off · press ON')+' · '+s.width+' × '+s.height+' · PC '+s.pc.toString(16).padStart(4,'0')}catch(e){status.textContent=e.message}}
 document.querySelector('#release').onclick=()=>request('/api/release',{}).catch(e=>status.textContent=e.message);document.querySelector('#reset').onclick=()=>request('/api/reset',{}).then(refresh).catch(e=>status.textContent=e.message);
 const keyboard={Enter:'Enter',Escape:'Exit',Backspace:'Del',ArrowUp:'Up',ArrowDown:'Down',ArrowLeft:'Left',ArrowRight:'Right','+':'Add','-':'Sub','*':'Mul','/':'Div','^':'Power','.':'DecPnt','(':'LParen',')':'RParen',',':'Comma',Delete:'Clear',F1:'F1',F2:'F2',F3:'F3',F4:'F4',F5:'F5'};
 window.addEventListener('keydown',e=>{if(e.target.matches('select,input,textarea'))return;const key=keyboard[e.key]||(/^[0-9]$/.test(e.key)?e.key:null);if(key&&!e.repeat){e.preventDefault();tap(key)}});request('/api/programs').then(s=>{if(s.files.length){document.querySelector('#programs').hidden=false;for(const name of s.files){const o=document.createElement('option');o.value=o.textContent=name;document.querySelector('#program').appendChild(o)}}}).catch(()=>{});
 document.querySelector('#send').onclick=()=>request('/api/send',{file:document.querySelector('#program').value}).then(refresh).catch(e=>status.textContent=e.message);
-refresh();setInterval(refresh,200);
+async function start(){try{ti85Legends=await request('/ti85-keypad.json')}catch(error){status.textContent=error.message;return}await refresh();setInterval(refresh,200)}
+start();
 </script>
 </html>

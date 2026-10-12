@@ -156,6 +156,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if self.path == '/':
                 return self.reply(200, Path(__file__).with_name('index.html').read_bytes(), 'text/html; charset=utf-8')
+            if self.path == '/ti85-keypad.json':
+                return self.reply(200, Path(__file__).with_name('ti85-keypad.json').read_bytes(), 'application/json; charset=utf-8')
             if self.path == '/api/programs':
                 folder = self.server.program_dir
                 files = sorted(p.name for p in folder.glob('*') if p.is_file() and p.suffix.lower() == '.85p') if folder else []

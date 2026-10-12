@@ -1,13 +1,11 @@
-- Improve the TI-85 skin with complete legends for every key:
-  - Show primary functions, all 2nd functions, and all ALPHA letters/symbols.
-  - Make the ALPHA lettering readable at the normal native GUI size, with
-    distinct colors for primary, 2nd, and ALPHA legends.
-  - Use the same accurate key legends in the native skin and web control panel.
-  - Preserve the existing key positions, clickable areas, and emulator key codes.
-  - Compare every legend with a TI-85 keypad reference and check that 2nd/ALPHA
-    combinations enter the expected functions and letters before release.
-  - Retain the current skin's appearance while adding the missing information;
-    create original artwork and record any reference attribution.
+- Before releasing the new complete TI-85 key legends:
+  - Check 2nd/ALPHA combinations against actual calculator input, including
+    lowercase, equals, and space; rendering has been visually reviewed only.
+  - Review the native GUI's labels and click targets during calculator use.
+  - Review the web keypad on a small mobile display.
+  - Full printed legends are now transcribed from the maintainer's photograph
+    and shared between the original vector skin and web keypad. Native key
+    positions/click rectangles and emulator key codes are retained.
 
 - Exercise the native GUI and calculator link transfers on NetBSD. Its CI build
   now passes after installing the matching native X11 runtime/development sets.

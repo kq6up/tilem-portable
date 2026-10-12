@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Create an original TI-85 keypad skin. Regeneration needs the Cairo library.
+"""Create an original TI-85 keypad skin. Regeneration needs Cairo and Pango.
 The generated SVG is editable; the .skn embeds the same drawing as PNG.
 """
 import ctypes as C
 import ctypes.util
+import json
 from pathlib import Path
 import struct
 import tempfile
@@ -15,13 +16,21 @@ ROOT = Path(__file__).resolve().parents[1]
 CODES = [53,52,51,50,49,54,55,56,2,3,4,1,48,40,32,47,39,31,23,15,
          46,38,30,22,14,45,37,29,21,13,44,36,28,20,12,43,35,27,19,11,
          42,34,26,18,10,41,33,25,17,9]
-NAMES = ['F1','F2','F3','F4','F5','2nd','EXIT','MORE','LEFT','RIGHT',
-         'UP','DOWN','ALPHA','x-VAR','DEL','GRAPH','STAT','PRGM','CUSTOM','CLEAR',
-         'LOG','SIN','COS','TAN','^','LN','EE','(',')','/',
-         'x²','7','8','9','×',',','4','5','6','−','STO','1','2','3','+',
-         'ON','0','.','(−)','ENTER']
+NAMES = ['F1','F2','F3','F4','F5','2nd','Exit','More','Left','Right',
+         'Up','Down','Alpha','XVar','Del','Graph','Stat','Prgm','Custom','Clear',
+         'Log','Sin','Cos','Tan','Power','Ln','EE','LParen','RParen','Div',
+         'Square','7','8','9','Mul','Comma','4','5','6','Sub','Store','1','2','3','Add',
+         'On','0','DecPnt','Chs','Enter']
+LEGENDS = json.loads((ROOT/'server/ti85-keypad.json').read_text())
 libname = ctypes.util.find_library('cairo') or '/opt/homebrew/lib/libcairo.2.dylib'
 lib = C.CDLL(libname)
+pango = C.CDLL(ctypes.util.find_library('pango-1.0') or '/opt/homebrew/lib/libpango-1.0.dylib')
+pangocairo = C.CDLL(ctypes.util.find_library('pangocairo-1.0') or '/opt/homebrew/lib/libpangocairo-1.0.dylib')
+gobject = C.CDLL(ctypes.util.find_library('gobject-2.0') or '/opt/homebrew/lib/libgobject-2.0.dylib')
+def external(library, name, args, result=None):
+    fn = getattr(library, name)
+    fn.argtypes, fn.restype = args, result
+    return fn
 def function(name, args, result=None):
     fn = getattr(lib, 'cairo_' + name)
     fn.argtypes, fn.restype = args, result
@@ -32,36 +41,48 @@ ctx = function('create', [p], p)(surface)
 color = function('set_source_rgb',[p,d,d,d])
 rect = function('rectangle',[p,d,d,d,d])
 fill = function('fill',[p])
-font = function('select_font_face',[p,C.c_char_p,i,i])
-size = function('set_font_size',[p,d])
 move = function('move_to',[p,d,d])
-show = function('show_text',[p,C.c_char_p])
 class Extents(C.Structure):
-    _fields_ = [(name,d) for name in ('x_bearing','y_bearing','width','height','x_advance','y_advance')]
-measure = function('text_extents',[p,C.c_char_p,C.POINTER(Extents)])
+    _fields_ = [(name,i) for name in ('x','y','width','height')]
+layout = external(pangocairo,'pango_cairo_create_layout',[p],p)(ctx)
+font_description = external(pango,'pango_font_description_from_string',[C.c_char_p],p)(b'Sans Bold')
+font_size = external(pango,'pango_font_description_set_absolute_size',[p,d])
+layout_font = external(pango,'pango_layout_set_font_description',[p,p])
+layout_text = external(pango,'pango_layout_set_text',[p,C.c_char_p,i])
+measure = external(pango,'pango_layout_get_pixel_extents',[p,p,C.POINTER(Extents)])
+baseline = external(pango,'pango_layout_get_baseline',[p],i)
+show = external(pangocairo,'pango_cairo_show_layout',[p,p])
 svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800">', '<!-- SPDX-License-Identifier: GPL-3.0-or-later; original TilEm Portable drawing -->']
 def box(x,y,w,h,hexcolor):
     rgb = tuple(int(hexcolor[j:j+2],16)/255 for j in (1,3,5))
     color(ctx,*rgb); rect(ctx,x,y,w,h); fill(ctx)
     svg.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{hexcolor}"/>')
-def text(x,y,value,points,hexcolor='#ffffff'):
+def text(x,y,value,points,hexcolor='#ffffff',anchor='middle'):
     rgb = tuple(int(hexcolor[j:j+2],16)/255 for j in (1,3,5))
-    font(ctx,b'Sans',0,1); size(ctx,points); ext=Extents()
-    measure(ctx,value.encode(),C.byref(ext)); color(ctx,*rgb)
-    move(ctx,x-ext.width/2-ext.x_bearing,y); show(ctx,value.encode())
-    svg.append(f'<text x="{x}" y="{y}" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="{points}" fill="{hexcolor}">{escape(value)}</text>')
+    font_size(font_description,points*1024); layout_font(layout,font_description)
+    layout_text(layout,value.encode(),-1); ext=Extents()
+    measure(layout,None,C.byref(ext)); color(ctx,*rgb)
+    offset = {'start':0, 'middle':ext.width/2, 'end':ext.width}[anchor]
+    move(ctx,x-offset-ext.x,y-baseline(layout)/1024); show(ctx,layout)
+    svg.append(f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-family="sans-serif" font-weight="bold" font-size="{points}" fill="{hexcolor}">{escape(value)}</text>')
 box(0,0,400,800,'#232b36')
 text(200,35,'TilEm · TI-85',22)
 box(48,52,304,160,'#151c24')
 box(72,68,256,128,'#cad5a7')
-text(200,237,'SCIENTIFIC GRAPHING CALCULATOR',10,'#a3afbf')
+text(200,237,'GOLD: 2nd  ·  BLUE: ALPHA  ·  ␣: SPACE',10,'#a3afbf')
 rectangles=[]
 for index,name in enumerate(NAMES):
     row,col=divmod(index,5)
     x,y=18+col*75,258+row*52
     rectangles.append((x,y,x+64,y+40))
-    box(x,y,64,40,'#365b88' if index < 5 or name in ('2nd','ALPHA') else '#495260')
-    text(x+32,y+26,name,12 if len(name)>4 else 16)
+    legend = LEGENDS[name]
+    primary = legend['primary']
+    box(x,y,64,40,'#996b26' if name == '2nd' else '#365b88' if index < 5 or name == 'Alpha' else '#495260')
+    text(x+32,y+26,primary,12 if len(primary)>4 else 16)
+    if legend.get('second'):
+        text(x,y-3,legend['second'],10.5,'#f4d47b',anchor='start')
+    if legend.get('alpha'):
+        text(x+64,y-3,legend['alpha'],12,'#87d7ed',anchor='end')
 text(200,791,'Right-click for files, settings and debugger',10,'#a3afbf')
 svg.append('</svg>')
 folder=ROOT/'data/skins'
@@ -79,5 +100,7 @@ with tempfile.TemporaryDirectory() as temporary:
             +b''.join(struct.pack('<4I',*r) for r in rectangles))
     header=header[:20]+u32(len(header))+header[24:]
     (folder/'ti85.skn').write_bytes(header+png.read_bytes())
+external(pango,'pango_font_description_free',[p])(font_description)
+external(gobject,'g_object_unref',[p])(layout)
 function('destroy',[p])(ctx); function('surface_destroy',[p])(surface)
 print(folder/'ti85.skn')

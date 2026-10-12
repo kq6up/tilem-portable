@@ -4,7 +4,7 @@
 set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 case $(uname -s) in Darwin) ;; *) echo 'This script is for macOS.' >&2; exit 1;; esac
-version=2.0.3
+version=2.0.4
 app="$root/TilEm $version.app"
 # Keep the established identity and runtime paths across version upgrades.
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources/tilem2" "$root/var/config-201" "$root/var/run"

@@ -46,4 +46,8 @@ Thibault Duponchelle (aka contra-sh)
 
 Portable fork addition:
 ti85.skn and ti85.svg = original vector keypad drawing, GPL v3 or later.
-Regenerate with scripts/generate-ti85-skin.py (Python 3 and Cairo).
+Regenerate with scripts/generate-ti85-skin.py (Python 3, Cairo and Pango).
+Primary/2nd/ALPHA legends share server/ti85-keypad.json with the web keypad.
+Legend reference: maintainer-supplied TI-85 photograph IMG_2157.HEIC,
+October 11, 2026. The photograph is not included; the artwork remains original.
+See docs/TI85-SKIN.md.

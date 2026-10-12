@@ -4,106 +4,180 @@
 <text x="200" y="35" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#ffffff">TilEm · TI-85</text>
 <rect x="48" y="52" width="304" height="160" fill="#151c24"/>
 <rect x="72" y="68" width="256" height="128" fill="#cad5a7"/>
-<text x="200" y="237" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#a3afbf">SCIENTIFIC GRAPHING CALCULATOR</text>
+<text x="200" y="237" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#a3afbf">GOLD: 2nd  ·  BLUE: ALPHA  ·  ␣: SPACE</text>
 <rect x="18" y="258" width="64" height="40" fill="#365b88"/>
 <text x="50" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F1</text>
+<text x="18" y="255" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">M1</text>
 <rect x="93" y="258" width="64" height="40" fill="#365b88"/>
 <text x="125" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F2</text>
+<text x="93" y="255" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">M2</text>
 <rect x="168" y="258" width="64" height="40" fill="#365b88"/>
 <text x="200" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F3</text>
+<text x="168" y="255" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">M3</text>
 <rect x="243" y="258" width="64" height="40" fill="#365b88"/>
 <text x="275" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F4</text>
+<text x="243" y="255" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">M4</text>
 <rect x="318" y="258" width="64" height="40" fill="#365b88"/>
 <text x="350" y="284" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">F5</text>
-<rect x="18" y="310" width="64" height="40" fill="#365b88"/>
+<text x="318" y="255" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">M5</text>
+<rect x="18" y="310" width="64" height="40" fill="#996b26"/>
 <text x="50" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">2nd</text>
 <rect x="93" y="310" width="64" height="40" fill="#495260"/>
 <text x="125" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">EXIT</text>
+<text x="93" y="307" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">QUIT</text>
 <rect x="168" y="310" width="64" height="40" fill="#495260"/>
 <text x="200" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">MORE</text>
+<text x="168" y="307" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">MODE</text>
 <rect x="243" y="310" width="64" height="40" fill="#495260"/>
-<text x="275" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LEFT</text>
+<text x="275" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">←</text>
 <rect x="318" y="310" width="64" height="40" fill="#495260"/>
-<text x="350" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">RIGHT</text>
+<text x="350" y="336" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">→</text>
 <rect x="18" y="362" width="64" height="40" fill="#495260"/>
-<text x="50" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">UP</text>
+<text x="50" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">↑</text>
 <rect x="93" y="362" width="64" height="40" fill="#495260"/>
-<text x="125" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">DOWN</text>
+<text x="125" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">↓</text>
 <rect x="168" y="362" width="64" height="40" fill="#365b88"/>
 <text x="200" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">ALPHA</text>
+<text x="168" y="359" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">alpha</text>
 <rect x="243" y="362" width="64" height="40" fill="#495260"/>
 <text x="275" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">x-VAR</text>
+<text x="243" y="359" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">LINK</text>
+<text x="307" y="359" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">x</text>
 <rect x="318" y="362" width="64" height="40" fill="#495260"/>
 <text x="350" y="388" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">DEL</text>
+<text x="318" y="359" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">INS</text>
 <rect x="18" y="414" width="64" height="40" fill="#495260"/>
 <text x="50" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">GRAPH</text>
+<text x="18" y="411" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">SOLVER</text>
 <rect x="93" y="414" width="64" height="40" fill="#495260"/>
 <text x="125" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">STAT</text>
+<text x="93" y="411" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">SIMULT</text>
 <rect x="168" y="414" width="64" height="40" fill="#495260"/>
 <text x="200" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">PRGM</text>
+<text x="168" y="411" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">POLY</text>
 <rect x="243" y="414" width="64" height="40" fill="#495260"/>
 <text x="275" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">CUSTOM</text>
+<text x="243" y="411" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CATALOG</text>
 <rect x="318" y="414" width="64" height="40" fill="#495260"/>
 <text x="350" y="440" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">CLEAR</text>
+<text x="318" y="411" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">TOLER</text>
 <rect x="18" y="466" width="64" height="40" fill="#495260"/>
 <text x="50" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LOG</text>
+<text x="18" y="463" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">10ˣ</text>
+<text x="82" y="463" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">A</text>
 <rect x="93" y="466" width="64" height="40" fill="#495260"/>
 <text x="125" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">SIN</text>
+<text x="93" y="463" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">SIN⁻¹</text>
+<text x="157" y="463" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">B</text>
 <rect x="168" y="466" width="64" height="40" fill="#495260"/>
 <text x="200" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">COS</text>
+<text x="168" y="463" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">COS⁻¹</text>
+<text x="232" y="463" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">C</text>
 <rect x="243" y="466" width="64" height="40" fill="#495260"/>
 <text x="275" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">TAN</text>
+<text x="243" y="463" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">TAN⁻¹</text>
+<text x="307" y="463" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">D</text>
 <rect x="318" y="466" width="64" height="40" fill="#495260"/>
 <text x="350" y="492" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">^</text>
+<text x="318" y="463" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">π</text>
+<text x="382" y="463" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">E</text>
 <rect x="18" y="518" width="64" height="40" fill="#495260"/>
 <text x="50" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">LN</text>
+<text x="18" y="515" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">eˣ</text>
+<text x="82" y="515" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">F</text>
 <rect x="93" y="518" width="64" height="40" fill="#495260"/>
 <text x="125" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">EE</text>
+<text x="93" y="515" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">x⁻¹</text>
+<text x="157" y="515" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">G</text>
 <rect x="168" y="518" width="64" height="40" fill="#495260"/>
 <text x="200" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">(</text>
+<text x="168" y="515" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">[</text>
+<text x="232" y="515" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">H</text>
 <rect x="243" y="518" width="64" height="40" fill="#495260"/>
 <text x="275" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">)</text>
+<text x="243" y="515" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">]</text>
+<text x="307" y="515" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">I</text>
 <rect x="318" y="518" width="64" height="40" fill="#495260"/>
-<text x="350" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">/</text>
+<text x="350" y="544" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">÷</text>
+<text x="318" y="515" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CALC</text>
+<text x="382" y="515" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">J</text>
 <rect x="18" y="570" width="64" height="40" fill="#495260"/>
 <text x="50" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">x²</text>
+<text x="18" y="567" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">√</text>
+<text x="82" y="567" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">K</text>
 <rect x="93" y="570" width="64" height="40" fill="#495260"/>
 <text x="125" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">7</text>
+<text x="93" y="567" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">MATRX</text>
+<text x="157" y="567" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">L</text>
 <rect x="168" y="570" width="64" height="40" fill="#495260"/>
 <text x="200" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">8</text>
+<text x="168" y="567" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">VECTR</text>
+<text x="232" y="567" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">M</text>
 <rect x="243" y="570" width="64" height="40" fill="#495260"/>
 <text x="275" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">9</text>
+<text x="243" y="567" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CPLX</text>
+<text x="307" y="567" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">N</text>
 <rect x="318" y="570" width="64" height="40" fill="#495260"/>
 <text x="350" y="596" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">×</text>
+<text x="318" y="567" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">MATH</text>
+<text x="382" y="567" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">O</text>
 <rect x="18" y="622" width="64" height="40" fill="#495260"/>
 <text x="50" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">,</text>
+<text x="18" y="619" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">∠</text>
+<text x="82" y="619" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">P</text>
 <rect x="93" y="622" width="64" height="40" fill="#495260"/>
 <text x="125" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">4</text>
+<text x="93" y="619" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CONS</text>
+<text x="157" y="619" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">Q</text>
 <rect x="168" y="622" width="64" height="40" fill="#495260"/>
 <text x="200" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">5</text>
+<text x="168" y="619" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CONV</text>
+<text x="232" y="619" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">R</text>
 <rect x="243" y="622" width="64" height="40" fill="#495260"/>
 <text x="275" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">6</text>
+<text x="243" y="619" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">STRNG</text>
+<text x="307" y="619" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">S</text>
 <rect x="318" y="622" width="64" height="40" fill="#495260"/>
 <text x="350" y="648" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">−</text>
+<text x="318" y="619" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">LIST</text>
+<text x="382" y="619" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">T</text>
 <rect x="18" y="674" width="64" height="40" fill="#495260"/>
-<text x="50" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">STO</text>
+<text x="50" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">STO▶</text>
+<text x="18" y="671" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">RCL</text>
+<text x="82" y="671" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">=</text>
 <rect x="93" y="674" width="64" height="40" fill="#495260"/>
 <text x="125" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">1</text>
+<text x="93" y="671" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">BASE</text>
+<text x="157" y="671" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">U</text>
 <rect x="168" y="674" width="64" height="40" fill="#495260"/>
 <text x="200" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">2</text>
+<text x="168" y="671" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">TEST</text>
+<text x="232" y="671" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">V</text>
 <rect x="243" y="674" width="64" height="40" fill="#495260"/>
 <text x="275" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">3</text>
+<text x="243" y="671" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">VARS</text>
+<text x="307" y="671" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">W</text>
 <rect x="318" y="674" width="64" height="40" fill="#495260"/>
 <text x="350" y="700" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">+</text>
+<text x="318" y="671" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">MEM</text>
+<text x="382" y="671" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">X</text>
 <rect x="18" y="726" width="64" height="40" fill="#495260"/>
 <text x="50" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">ON</text>
+<text x="18" y="723" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">OFF</text>
 <rect x="93" y="726" width="64" height="40" fill="#495260"/>
 <text x="125" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">0</text>
+<text x="93" y="723" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">CHAR</text>
+<text x="157" y="723" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">Y</text>
 <rect x="168" y="726" width="64" height="40" fill="#495260"/>
 <text x="200" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">.</text>
+<text x="168" y="723" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">:</text>
+<text x="232" y="723" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">Z</text>
 <rect x="243" y="726" width="64" height="40" fill="#495260"/>
 <text x="275" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffffff">(−)</text>
+<text x="243" y="723" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">ANS</text>
+<text x="307" y="723" text-anchor="end" font-family="sans-serif" font-weight="bold" font-size="12" fill="#87d7ed">␣</text>
 <rect x="318" y="726" width="64" height="40" fill="#495260"/>
 <text x="350" y="752" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12" fill="#ffffff">ENTER</text>
+<text x="318" y="723" text-anchor="start" font-family="sans-serif" font-weight="bold" font-size="10.5" fill="#f4d47b">ENTRY</text>
 <text x="200" y="791" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#a3afbf">Right-click for files, settings and debugger</text>
 </svg>

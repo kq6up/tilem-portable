@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 cmake_minimum_required(VERSION 3.16)
-project(tilem_portable VERSION 2.0.3 LANGUAGES C)
+project(tilem_portable VERSION 2.0.4 LANGUAGES C)
 include(GNUInstallDirs)
 include(CTest)
 include(CheckLibraryExists)
@@ -93,7 +93,7 @@ install(TARGETS tilembridge tilem-headless
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(PROGRAMS server/tilem-server DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(FILES server/index.html server/server.py DESTINATION ${CMAKE_INSTALL_DATADIR}/tilem-portable/server)
+install(FILES server/index.html server/server.py server/ti85-keypad.json DESTINATION ${CMAKE_INSTALL_DATADIR}/tilem-portable/server)
 install(FILES COPYING COPYING.LESSER docs/LICENSING.md DESTINATION ${CMAKE_INSTALL_DATADIR}/licenses/tilem-portable)
 if(TILEM_BUILD_GTK)
   find_package(PkgConfig REQUIRED)

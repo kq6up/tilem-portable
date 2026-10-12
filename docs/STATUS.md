@@ -1,5 +1,26 @@
 # Build and runtime status — 2026-10-11
 
+## 2.0.4 skin work (development)
+
+* Added the complete printed TI-85 primary/2nd/ALPHA legends from the
+  maintainer-supplied photograph to the native vector skin and browser keypad.
+  Labels share `server/ti85-keypad.json`; native click rectangles and key codes
+  are unchanged. The generator now uses Pango font fallback for symbols.
+* Reviewed the generated native image and a browser visual preview. Actual
+  calculator input with the new skin remains to be checked; no installed app
+  was replaced or restarted. See `docs/TI85-SKIN.md` and the remaining TODO.
+* Development version references now target 2.0.4; no 2.0.4 release is published.
+
+## 2.0.3 release
+
+* Published https://github.com/kq6up/tilem-portable/releases/tag/v2.0.3 at
+  3f349d7485de4a9c0b89deb9e76c16c2467a701d, with the tagged source archive and
+  SHA256SUMS.txt. Both assets were downloaded and matched to the originals;
+  the source tar matched a fresh archive of the tag byte-for-byte.
+* All four jobs passed for both main and the tag, including macOS/Ubuntu/NetBSD
+  GUI builds and Slackware core compilation. Tag run:
+  https://github.com/kq6up/tilem-portable/actions/runs/38186439621.
+
 ## 2.0.3 release preparation
 
 * Version 2.0.3 includes the CI dependency fixes that passed all four jobs at
