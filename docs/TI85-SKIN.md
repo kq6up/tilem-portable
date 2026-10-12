@@ -1,6 +1,6 @@
 # TI-85 keypad legends
 
-The next 2.0.4 version adds the printed primary functions, 2nd functions, and
+Version 2.0.4 adds the printed primary functions, 2nd functions, and
 ALPHA letters/symbols shown in the maintainer-supplied `IMG_2157.HEIC` photograph
 of a TI-85, supplied October 11, 2026. The photograph is used as a label reference
 and is not redistributed. The skin remains an original vector drawing under
@@ -47,6 +47,9 @@ The generated native artwork and a browser visual preview were reviewed.
 The corrected 2.0.4 development app was built and installed on the maintainer's
 Mac. The existing calculator save was backed up and matched byte-for-byte
 before launch. The running native backend reports an active TI-85 LCD.
-Native accessibility inspection timed out, so mouse input with the relocated
-arrows and actual 2nd/ALPHA combinations still need review during use.
-Version 2.0.4 is in development; no 2.0.4 release has been published.
+Native accessibility inspection timed out. The maintainer subsequently used
+and approved the corrected Mac GUI. The same version was built and launched on
+the maintainer's ARM64 Slackware X desktop; the maintainer confirmed that the
+native window and skin looked good. Specific 2nd/ALPHA combinations have not
+been exercised in an automated check.
+Version 2.0.4 is the source release containing these skin changes.

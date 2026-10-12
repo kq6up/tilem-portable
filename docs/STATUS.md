@@ -1,6 +1,6 @@
 # Build and runtime status — 2026-10-11
 
-## 2.0.4 skin work (development)
+## 2.0.4
 
 * Added the complete printed TI-85 primary/2nd/ALPHA legends from the
   maintainer-supplied photograph to the native vector skin and browser keypad.
@@ -11,9 +11,23 @@
   installed the corrected 2.0.4 development Mac app, backed up the existing
   calculator save, and confirmed it was unchanged before launch. The running
   native backend reports an active TI-85 LCD. Native accessibility inspection
-  timed out; relocated mouse targets and actual 2nd/ALPHA input remain to be
-  reviewed during use. See `docs/TI85-SKIN.md` and the remaining TODO.
-* Development version references now target 2.0.4; no 2.0.4 release is published.
+  timed out. The maintainer subsequently used the Mac GUI and reported the
+  corrected skin working well. Specific 2nd/ALPHA combinations still need
+  review. See `docs/TI85-SKIN.md` and the remaining TODO.
+* Built the corrected 2.0.4 GTK GUI, core, shared bridge and headless tool on
+  the maintainer's ARM64 Slackware 15.0+ system with testing disabled. Created
+  a local `.txz` with the pinned TI libraries isolated in
+  `/usr/lib64/tilem-portable`, then unpacked it privately into the new working
+  folder. No system packages were replaced. The existing calculator save and
+  configuration were copied, with the original 2.0.2 folder retained.
+* Launched the privately installed native app on the maintainer's X desktop.
+  SSH disconnected during launch, but the maintainer confirmed the TilEm
+  window was visible and the new skin looked good. This desktop confirmation
+  is user-reported; new automated key/transfer checks were not performed.
+* All four platform CI jobs passed on the corrected skin commit 00081f8
+  (run 38189819013). The local Slackware binary package remains local.
+* Version references target 2.0.4. Source release:
+  https://github.com/kq6up/tilem-portable/releases/tag/v2.0.4.
 
 ## 2.0.3 release
 

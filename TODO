@@ -1,7 +1,8 @@
-- Before releasing the new complete TI-85 key legends:
+- Further TI-85 key legend review:
   - Check 2nd/ALPHA combinations against actual calculator input, including
-    lowercase, equals, and space; rendering has been visually reviewed only.
-  - Review the native GUI's labels and click targets during calculator use.
+    lowercase, equals, and space. The maintainer has used and approved the
+    native GUI on macOS and confirmed the Slackware desktop rendering.
+  - Exercise all relocated native click targets and modifier combinations.
   - Review the web keypad on a small mobile display.
   - Full printed legends are now transcribed from the maintainer's photograph
     and shared between the original vector skin and web keypad. Native key
