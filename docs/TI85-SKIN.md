@@ -18,8 +18,11 @@ lowercase letters, as shown by the lowercase `alpha` legend on the calculator.
 The web labels describe calculator modifiers; the web keyboard shortcuts have
 not been expanded to type letters automatically.
 
-The native skin retains its 400×800 size, LCD rectangle, and all 50 original
-click rectangles. The web keypad retains its existing key ordering. Existing
+The native skin retains its 400×800 size and LCD rectangle. Its four arrows
+form a directional cross matching the photograph; ALPHA, x-VAR, and DEL sit
+below 2nd, EXIT, and MORE. The moved click rectangles are serialized in the
+original skin-file key order so each label still sends its correct key.
+The web keypad retains its existing key ordering. Existing
 emulator key codes, ROM behavior, and key-binding configuration are unchanged.
 
 ## Regeneration
@@ -41,7 +44,9 @@ alongside the server. Non-TI-85 calculator models retain their existing labels.
 ## Status
 
 The generated native artwork and a browser visual preview were reviewed.
-This is a rendering update; it has not yet been exercised in the native GUI
-or with actual 2nd/ALPHA key combinations. No calculator state was changed,
-and the installed application was not replaced during this work.
+The corrected 2.0.4 development app was built and installed on the maintainer's
+Mac. The existing calculator save was backed up and matched byte-for-byte
+before launch. The running native backend reports an active TI-85 LCD.
+Native accessibility inspection timed out, so mouse input with the relocated
+arrows and actual 2nd/ALPHA combinations still need review during use.
 Version 2.0.4 is in development; no 2.0.4 release has been published.

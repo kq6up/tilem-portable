@@ -21,6 +21,13 @@ NAMES = ['F1','F2','F3','F4','F5','2nd','Exit','More','Left','Right',
          'Log','Sin','Cos','Tan','Power','Ln','EE','LParen','RParen','Div',
          'Square','7','8','9','Mul','Comma','4','5','6','Sub','Store','1','2','3','Add',
          'On','0','DecPnt','Chs','Enter']
+# Drawing order is independent of the fixed skin-file key order above.
+VISUAL_NAMES = NAMES[:5] + ['2nd','Exit','More','Left','Up',
+                           'Alpha','XVar','Del','Down','Right'] + NAMES[15:]
+ARROW_RECTS = {
+    'Up': (294,310,338,342), 'Down': (294,370,338,402),
+    'Left': (243,336,283,376), 'Right': (342,336,382,376),
+}
 LEGENDS = json.loads((ROOT/'server/ti85-keypad.json').read_text())
 libname = ctypes.util.find_library('cairo') or '/opt/homebrew/lib/libcairo.2.dylib'
 lib = C.CDLL(libname)
@@ -70,19 +77,22 @@ text(200,35,'TilEm · TI-85',22)
 box(48,52,304,160,'#151c24')
 box(72,68,256,128,'#cad5a7')
 text(200,237,'GOLD: 2nd  ·  BLUE: ALPHA  ·  ␣: SPACE',10,'#a3afbf')
-rectangles=[]
-for index,name in enumerate(NAMES):
+rectangles={}
+for index,name in enumerate(VISUAL_NAMES):
     row,col=divmod(index,5)
     x,y=18+col*75,258+row*52
-    rectangles.append((x,y,x+64,y+40))
+    bounds = ARROW_RECTS.get(name, (x,y,x+64,y+40))
+    rectangles[name] = bounds
+    x,y,right,bottom = bounds
+    width,height = right-x,bottom-y
     legend = LEGENDS[name]
     primary = legend['primary']
-    box(x,y,64,40,'#996b26' if name == '2nd' else '#365b88' if index < 5 or name == 'Alpha' else '#495260')
-    text(x+32,y+26,primary,12 if len(primary)>4 else 16)
+    box(x,y,width,height,'#996b26' if name == '2nd' else '#365b88' if index < 5 or name == 'Alpha' else '#495260')
+    text(x+width/2,y+height/2+6,primary,12 if len(primary)>4 else 16)
     if legend.get('second'):
         text(x,y-3,legend['second'],10.5,'#f4d47b',anchor='start')
     if legend.get('alpha'):
-        text(x+64,y-3,legend['alpha'],12,'#87d7ed',anchor='end')
+        text(x+width,y-3,legend['alpha'],12,'#87d7ed',anchor='end')
 text(200,791,'Right-click for files, settings and debugger',10,'#a3afbf')
 svg.append('</svg>')
 folder=ROOT/'data/skins'
@@ -97,7 +107,7 @@ with tempfile.TemporaryDirectory() as temporary:
     header=(b'TilEm v2.00'.ljust(16,b'\0')+u32(0xfeedbabe)+u32(0)
             +string(name)+string(author)+u32(2)+u32(0xcad5a7)+u32(0x152115)
             +b'TI-85'.ljust(8,b'\0')+struct.pack('<4I',72,68,328,196)+u32(50)
-            +b''.join(struct.pack('<4I',*r) for r in rectangles))
+            +b''.join(struct.pack('<4I',*r) for r in (rectangles[key] for key in NAMES)))
     header=header[:20]+u32(len(header))+header[24:]
     (folder/'ti85.skn').write_bytes(header+png.read_bytes())
 external(pango,'pango_font_description_free',[p])(font_description)

@@ -5,7 +5,8 @@
   - Review the web keypad on a small mobile display.
   - Full printed legends are now transcribed from the maintainer's photograph
     and shared between the original vector skin and web keypad. Native key
-    positions/click rectangles and emulator key codes are retained.
+    arrows now form a directional cross; moved click rectangles retain their
+    original emulator key codes.
 
 - Exercise the native GUI and calculator link transfers on NetBSD. Its CI build
   now passes after installing the matching native X11 runtime/development sets.

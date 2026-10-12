@@ -4,11 +4,15 @@
 
 * Added the complete printed TI-85 primary/2nd/ALPHA legends from the
   maintainer-supplied photograph to the native vector skin and browser keypad.
-  Labels share `server/ti85-keypad.json`; native click rectangles and key codes
-  are unchanged. The generator now uses Pango font fallback for symbols.
-* Reviewed the generated native image and a browser visual preview. Actual
-  calculator input with the new skin remains to be checked; no installed app
-  was replaced or restarted. See `docs/TI85-SKIN.md` and the remaining TODO.
+  Labels share `server/ti85-keypad.json`. Native arrows now form a directional
+  cross matching the photograph, with click rectangles kept in the correct
+  hardware key order. The generator uses Pango font fallback for symbols.
+* Reviewed the generated native image and a browser visual preview. Built and
+  installed the corrected 2.0.4 development Mac app, backed up the existing
+  calculator save, and confirmed it was unchanged before launch. The running
+  native backend reports an active TI-85 LCD. Native accessibility inspection
+  timed out; relocated mouse targets and actual 2nd/ALPHA input remain to be
+  reviewed during use. See `docs/TI85-SKIN.md` and the remaining TODO.
 * Development version references now target 2.0.4; no 2.0.4 release is published.
 
 ## 2.0.3 release
