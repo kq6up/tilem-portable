@@ -4,24 +4,26 @@
 set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 case $(uname -s) in Darwin) ;; *) echo 'This script is for macOS.' >&2; exit 1;; esac
-app="$root/TilEm 2.0.1.app"
+version=2.0.3
+app="$root/TilEm $version.app"
+# Keep the established identity and runtime paths across version upgrades.
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources/tilem2" "$root/var/config-201" "$root/var/run"
 chmod 700 "$root/var/run"
 cp "$root/build/tilem2" "$app/Contents/MacOS/TilEm.new"
 mv "$app/Contents/MacOS/TilEm.new" "$app/Contents/MacOS/TilEm"
 cp "$root/data/keybindings.ini" "$app/Contents/Resources/tilem2/"
 cp -R "$root/data/skins" "$root/data/symbols" "$root/data/icons" "$app/Contents/Resources/tilem2/"
-cat > "$app/Contents/Info.plist" <<'PLIST'
+cat > "$app/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-<key>CFBundleName</key><string>TilEm 2.0.1</string>
-<key>CFBundleDisplayName</key><string>TilEm 2.0.1</string>
+<key>CFBundleName</key><string>TilEm $version</string>
+<key>CFBundleDisplayName</key><string>TilEm $version</string>
 <key>CFBundleIdentifier</key><string>org.tilem.portable.v201</string>
 <key>CFBundleExecutable</key><string>TilEm</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>2.0.1</string>
-<key>CFBundleVersion</key><string>2.0.1</string>
+<key>CFBundleShortVersionString</key><string>$version</string>
+<key>CFBundleVersion</key><string>$version</string>
 <key>NSHighResolutionCapable</key><true/>
 </dict></plist>
 PLIST

@@ -10,9 +10,9 @@ Build outputs, `.deps`, `var`, app bundles and ROMs are ignored.
 Create an immutable tag after reviewing the commit, then generate the source:
 
 ```sh
-git tag v2.0.2
-git archive --format=tar --prefix=tilem-portable-2.0.2/ v2.0.2 | gzip -n > tilem-portable-2.0.2.tar.gz
-shasum -a 256 tilem-portable-2.0.2.tar.gz
+git tag v2.0.3
+git archive --format=tar --prefix=tilem-portable-2.0.3/ v2.0.3 | gzip -n > tilem-portable-2.0.3.tar.gz
+shasum -a 256 tilem-portable-2.0.3.tar.gz
 ```
 
 Publish that exact archive as a GitHub release attachment. Put its URL and
@@ -55,6 +55,7 @@ marks a local candidate, not a SlackBuilds.org submission.
 ## Automation
 
 `.github/workflows/build.yml` prepares full Linux/macOS and NetBSD GUI builds,
-plus a Slackware core compilation. These workflows have not run in this local
-checkout. A Slackware GUI build still requires its TI library packages; use the
-recipe above. A successful compile does not establish GUI operation on that OS.
+plus a Slackware core compilation. All four jobs passed at commit e4fff5d;
+see `docs/STATUS.md` for the run and the scope of each check. A Slackware GUI
+build still requires its TI library packages; use the recipe above.
+A successful compile does not establish GUI operation on that OS.

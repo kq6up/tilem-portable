@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 cmake_minimum_required(VERSION 3.16)
-project(tilem_portable VERSION 2.0.2 LANGUAGES C)
+project(tilem_portable VERSION 2.0.3 LANGUAGES C)
 include(GNUInstallDirs)
 include(CTest)
 include(CheckLibraryExists)

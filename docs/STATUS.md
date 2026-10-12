@@ -1,5 +1,16 @@
 # Build and runtime status — 2026-10-11
 
+## 2.0.3 release preparation
+
+* Version 2.0.3 includes the CI dependency fixes that passed all four jobs at
+  e4fff5d. Release builds use the same workflow with unit tests disabled.
+* CMake and the package recipe version references now target 2.0.3.
+  The macOS development app script creates `TilEm 2.0.3.app` with matching
+  bundle version metadata. It retains `org.tilem.portable.v201`,
+  `var/config-201/calculator.sav`, and `var/run/control-201.sock` to preserve
+  existing calculator state and control-server configuration. The installed
+  development app was not replaced or restarted as part of release preparation.
+
 ## Completed on this machine
 
 * Source published to https://github.com/kq6up/tilem-portable, preserving the
